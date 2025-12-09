@@ -1,0 +1,72 @@
+{
+  "population_size": 15,
+  "mutation_rate": 0.15,
+  "crossover_rate": 0.8,
+  "elite_percentage": 0.25,
+  "max_generations": 50,
+  "fitness_threshold": 0.85,
+  "backtest_days": 14,
+  "paper_trading_days": 3,
+  "live_trading_threshold": 0.8,
+  
+  "evolution_triggers": {
+    "performance_drop_threshold": 0.1,
+    "max_drawdown_trigger": 0.08,
+    "consecutive_losses_trigger": 5,
+    "evaluation_frequency_hours": 6
+  },
+  
+  "strategy_parameters": {
+    "agent_weights": {
+      "sentiment": {"min": 0.05, "max": 0.4, "default": 0.2},
+      "technical": {"min": 0.2, "max": 0.5, "default": 0.3},
+      "visual": {"min": 0.15, "max": 0.45, "default": 0.3},
+      "qabba": {"min": 0.1, "max": 0.35, "default": 0.2}
+    },
+    "signal_thresholds": {
+      "buy_threshold": {"min": 0.3, "max": 0.9, "default": 0.6},
+      "sell_threshold": {"min": -0.9, "max": -0.3, "default": -0.6},
+      "hold_threshold": {"min": 0.1, "max": 0.5, "default": 0.3}
+    },
+    "risk_parameters": {
+      "stop_loss": {"min": 0.005, "max": 0.05, "default": 0.02},
+      "take_profit": {"min": 0.01, "max": 0.1, "default": 0.04},
+      "position_size": {"min": 0.05, "max": 0.3, "default": 0.1},
+      "max_drawdown": {"min": 0.02, "max": 0.1, "default": 0.05}
+    }
+  },
+  
+  "market_conditions": {
+    "volatile": {
+      "volatility_threshold": 0.05,
+      "preferred_agents": ["technical", "qabba"],
+      "risk_multiplier": 0.8
+    },
+    "trending": {
+      "trend_strength_threshold": 0.7,
+      "preferred_agents": ["technical", "visual"],
+      "risk_multiplier": 1.2
+    },
+    "ranging": {
+      "range_bound_threshold": 0.3,
+      "preferred_agents": ["sentiment", "qabba"],
+      "risk_multiplier": 1.0
+    }
+  },
+  
+  "fitness_weights": {
+    "roi": 0.35,
+    "sharpe_ratio": 0.25,
+    "max_drawdown": 0.2,
+    "win_rate": 0.15,
+    "profit_factor": 0.05
+  },
+  
+  "advanced_features": {
+    "multi_timeframe_evolution": true,
+    "regime_aware_strategies": true,
+    "dynamic_risk_adjustment": true,
+    "ensemble_strategies": false,
+    "meta_learning": true
+  }
+}

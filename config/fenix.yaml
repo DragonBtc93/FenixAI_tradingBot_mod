@@ -1,0 +1,64 @@
+# Fenix Trading Bot Configuration
+# ================================
+
+trading:
+  symbol: BTCUSDT
+  timeframe: 15m
+  min_klines_to_start: 20
+  analysis_interval_seconds: 60
+  max_risk_per_trade: 0.02
+  max_total_exposure: 0.05
+  max_concurrent_trades: 3
+  min_risk_reward_ratio: 1.5
+  default_stop_loss_atr_multiplier: 1.5
+  default_take_profit_atr_multiplier: 3.0
+
+agents:
+  enable_technical: true
+  enable_qabba: true
+  enable_visual: false  # Desactivado por defecto - requiere modelo vision
+  enable_sentiment: false  # Desactivado por defecto - requiere APIs de noticias
+  technical_weight: 0.30
+  qabba_weight: 0.30
+  visual_weight: 0.25
+  sentiment_weight: 0.15
+  consensus_threshold: 0.65
+  min_confidence_to_trade: MEDIUM
+
+llm:
+  default_provider: ollama_local
+  default_model: qwen2.5:7b
+  temperature: 0.1
+  max_tokens: 500
+  timeout_seconds: 30
+  fallback_provider: ollama_local
+  fallback_model: gemma3:1b
+
+binance:
+  testnet: true  # IMPORTANTE: Cambiar a false para trading real
+  recv_window: 5000
+  min_notional: 5.0
+  max_requests_per_minute: 1200
+  max_orders_per_second: 10
+
+logging:
+  level: INFO
+  format: "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+  log_to_file: true
+  log_directory: logs
+  max_log_files: 30
+
+monitoring:
+  enable_metrics: true
+  metrics_port: 9090
+  health_check_interval: 300
+  cpu_alert_threshold: 80.0
+  memory_alert_threshold: 80.0
+  latency_alert_threshold_ms: 1000.0
+
+resilience:
+  max_retries: 3
+  base_retry_delay: 1.0
+  max_retry_delay: 60.0
+  circuit_breaker_failure_threshold: 5
+  circuit_breaker_recovery_timeout: 30.0

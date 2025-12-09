@@ -1,0 +1,433 @@
+# config/llm_providers.yaml
+# Configuración de providers LLM para cada agente
+# 
+# Escenarios de uso:
+# 1. all_local: Todo local con Ollama (recomendado para desarrollo)
+# 2. mixed_providers: Mix de local y cloud (recomendado para producción)
+# 3. mlx_optimized: Optimizado para Mac M-series con MLX
+# 4. all_cloud: Todo en la nube con APIs (máximo rendimiento)
+
+# ============================================================================
+# CONFIGURACIÓN ACTIVA (cambiar según necesidad)
+# ============================================================================
+active_profile: "groq_free"  # Opciones: all_local, mixed_providers, mlx_optimized, all_cloud, bench_hf, groq_free
+
+# ============================================================================
+# PERFIL 1: ALL LOCAL (Ollama)
+# ============================================================================
+# Ventajas: 
+# - Sin costo de API
+# - Privacidad total
+# - Sin latencia de red
+# Desventajas:
+# - Requiere recursos locales
+# - Modelos más pequeños
+# ============================================================================
+all_local:
+  sentiment:
+    provider_type: "ollama_local"
+    model_name: "qwen3:8b"
+    temperature: 0.15
+    max_tokens: 1500
+    timeout: 60
+    supports_vision: false
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5:7b"
+    api_base: "http://localhost:11434"
+  
+  technical:
+    provider_type: "ollama_local"
+    model_name: "qwen3:8b"
+    temperature: 0.1
+    max_tokens: 2000
+    timeout: 90
+    supports_vision: false
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "gemma3:1b"
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "gemma3:1b"
+    api_base: "http://localhost:11434"
+  
+  visual:
+    provider_type: "ollama_local"
+    model_name: "qwen3-vl:8b"
+    temperature: 0.1
+    max_tokens: 1200
+    timeout: 90
+    supports_vision: true
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5vl:7b-q4_K_M"
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5vl:7b-q4_K_M"
+    api_base: "http://localhost:11434"
+  
+  qabba:
+    provider_type: "ollama_local"
+    model_name: "qwen3:8b"
+    temperature: 0.05
+    max_tokens: 900
+    timeout: 120
+    supports_vision: false
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "adrienbrault/nous-hermes2pro-llama3-8b:q4_K_M"
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "adrienbrault/nous-hermes2pro-llama3-8b:q4_K_M"
+    api_base: "http://localhost:11434"
+  
+  decision:
+    provider_type: "ollama_local"
+    model_name: "qwen3:8b"
+    temperature: 0.15
+    max_tokens: 1000
+    timeout: 45
+    supports_vision: false
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5:7b"
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5:7b" 
+    api_base: "http://localhost:11434"
+
+# ============================================================================
+# PERFIL 2: MIXED PROVIDERS (Recomendado para Producción)
+# ============================================================================
+# Ventajas:
+# - Balance entre costo y rendimiento
+# - Fallbacks automáticos
+# - Usa cloud para tareas críticas
+# Desventajas:
+# - Requiere API keys
+# - Costo por uso de APIs
+# ============================================================================
+mixed_providers:
+  sentiment:
+    provider_type: "ollama_local"
+    model_name: "qwen2.5:7b"
+    temperature: 0.15
+    max_tokens: 1500
+    timeout: 60
+    supports_vision: false
+    api_base: "http://localhost:11434"
+    fallback_provider_type: "groq"
+    fallback_model_name: "mixtral-8x7b-32768"
+  
+  technical:
+    provider_type: "groq"  # Ultra rápido para análisis técnico
+    model_name: "mixtral-8x7b-32768"
+    temperature: 0.1
+    max_tokens: 2000
+    timeout: 30
+    supports_vision: false
+    # api_key: se lee desde GROQ_API_KEY env var
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "deepseek-r1:7b-qwen-distill-q4_K_M"
+  
+  visual:
+    provider_type: "openai"  # GPT-4 Vision para mejor análisis de gráficos
+    model_name: "gpt-4-vision-preview"
+    temperature: 0.1
+    max_tokens: 1200
+    timeout: 60
+    supports_vision: true
+    # api_key: se lee desde OPENAI_API_KEY env var
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5vl:7b-q4_K_M"
+  
+  qabba:
+    provider_type: "ollama_local"
+    model_name: "adrienbrault/nous-hermes2pro-llama3-8b:q4_K_M"
+    temperature: 0.05
+    max_tokens: 800
+    timeout: 45
+    supports_vision: false
+    api_base: "http://localhost:11434"
+  
+  decision:
+    provider_type: "anthropic"  # Claude para decisiones críticas
+    model_name: "claude-3-sonnet-20240229"
+    temperature: 0.15
+    max_tokens: 1000
+    timeout: 45
+    supports_vision: false
+    # api_key: se lee desde ANTHROPIC_API_KEY env var
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5:7b-instruct-q5_k_m"
+
+# ============================================================================
+# PERFIL 3: MLX OPTIMIZED (Mac M-series)
+# ============================================================================
+# Ventajas:
+# - Optimizado para Apple Silicon
+# - Excelente rendimiento local
+# - Menor uso de memoria
+# Desventajas:
+# - Solo funciona en Mac M-series
+# - Requiere instalación de mlx-lm
+# ============================================================================
+mlx_optimized:
+  sentiment:
+    provider_type: "huggingface_mlx"
+    model_name: "mlx-community/Qwen2.5-7B-Instruct-4bit"
+    temperature: 0.15
+    max_tokens: 1500
+    timeout: 60
+    supports_vision: false
+  
+  technical:
+    provider_type: "huggingface_mlx"
+    model_name: "mlx-community/DeepSeek-R1-Distill-Qwen-7B-4bit"
+    temperature: 0.1
+    max_tokens: 2000
+    timeout: 90
+    supports_vision: false
+  
+  visual:
+    provider_type: "ollama_local"  # MLX vision aún en desarrollo
+    model_name: "qwen2.5vl:7b-q4_K_M"
+    temperature: 0.1
+    max_tokens: 1200
+    timeout: 90
+    supports_vision: true
+    api_base: "http://localhost:11434"
+  
+  qabba:
+    provider_type: "huggingface_mlx"
+    model_name: "mlx-community/Hermes-2-Pro-Llama-3-8B-4bit"
+    temperature: 0.05
+    max_tokens: 800
+    timeout: 45
+    supports_vision: false
+  
+  decision:
+    provider_type: "huggingface_mlx"
+    model_name: "mlx-community/Qwen2.5-7B-Instruct-4bit"
+    temperature: 0.15
+    max_tokens: 1000
+    timeout: 45
+    supports_vision: false
+
+# ============================================================================
+# PERFIL: GROQ FREE (Máxima Velocidad y Gratuito)
+# ============================================================================
+# Ventajas:
+# - Extremadamente rápido (LPU)
+# - Gratuito (con límites de rate)
+# - Modelos potentes (Llama 3, Mixtral)
+# Desventajas:
+# - Rate limits estrictos en tier gratuito
+# - Requiere API Key
+# ============================================================================
+groq_free:
+  sentiment:
+    provider_type: "groq"
+    model_name: "llama-3.3-70b-versatile"
+    temperature: 0.15
+    max_tokens: 1500
+    timeout: 30
+    supports_vision: false
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5:7b"
+  
+  technical:
+    provider_type: "groq"
+    model_name: "llama-3.3-70b-versatile"
+    temperature: 0.1
+    max_tokens: 2000
+    timeout: 30
+    supports_vision: false
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "gemma3:1b"
+  
+  visual:
+    provider_type: "groq"
+    model_name: "meta-llama/llama-4-scout-17b-16e-instruct"  # Groq multimodal (preview)
+    temperature: 0.1
+    max_tokens: 1200
+    timeout: 30
+    supports_vision: true
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5vl:7b-q4_K_M"
+  
+  qabba:
+    provider_type: "groq"
+    model_name: "llama-3.3-70b-versatile"
+    temperature: 0.05
+    max_tokens: 800
+    timeout: 30
+    supports_vision: false
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "adrienbrault/nous-hermes2pro-llama3-8b:q4_K_M"
+  
+  decision:
+    provider_type: "groq"
+    model_name: "llama-3.3-70b-versatile"
+    temperature: 0.15
+    max_tokens: 1000
+    timeout: 30
+    supports_vision: false
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5:7b"
+
+  risk_manager:
+    provider_type: "groq"
+    model_name: "llama-3.3-70b-versatile"
+    temperature: 0.2
+    max_tokens: 1800
+    timeout: 30
+    supports_vision: false
+    extra_config:
+      reasoning: "conservative"
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5:7b-instruct-q5_k_m"
+
+# ============================================================================
+# PERFIL 4: ALL CLOUD (Máximo Rendimiento)
+# ============================================================================
+# Ventajas:
+# - Máximo rendimiento
+# - Sin necesidad de recursos locales
+# - Modelos más grandes y capaces
+# Desventajas:
+# - Mayor costo
+# - Requiere conexión estable
+# - Latencia de red
+# ============================================================================
+all_cloud:
+  sentiment:
+    provider_type: "groq"
+    model_name: "mixtral-8x7b-32768"
+    temperature: 0.15
+    max_tokens: 1500
+    timeout: 30
+    supports_vision: false
+  
+  technical:
+    provider_type: "groq"
+    model_name: "mixtral-8x7b-32768"
+    temperature: 0.1
+    max_tokens: 2000
+    timeout: 30
+    supports_vision: false
+  
+  visual:
+    provider_type: "openai"
+    model_name: "gpt-4-vision-preview"
+    temperature: 0.1
+    max_tokens: 1200
+    timeout: 60
+    supports_vision: true
+  
+  qabba:
+    provider_type: "groq"
+    model_name: "mixtral-8x7b-32768"
+    temperature: 0.05
+    max_tokens: 800
+    timeout: 30
+    supports_vision: false
+  
+  decision:
+    provider_type: "anthropic"
+    model_name: "claude-3-opus-20240229"  # Más potente para decisiones
+    temperature: 0.15
+    max_tokens: 1000
+    timeout: 45
+    supports_vision: false
+
+# ============================================================================
+# VARIABLES DE ENTORNO REQUERIDAS (según providers usados)
+# ============================================================================
+# OPENAI_API_KEY=sk-...           # Para provider_type: "openai"
+# ANTHROPIC_API_KEY=sk-ant-...    # Para provider_type: "anthropic"  
+# GROQ_API_KEY=gsk_...            # Para provider_type: "groq"
+# HUGGINGFACE_API_KEY=hf_...      # Para provider_type: "huggingface_inference"
+# OLLAMA_API_KEY=...              # Para provider_type: "ollama_cloud"
+# OLLAMA_CLOUD_URL=https://...    # Para provider_type: "ollama_cloud"
+
+# ============================================================================
+# NOTAS DE CONFIGURACIÓN
+# ============================================================================
+# 1. Los valores de api_key se leen automáticamente desde variables de entorno
+# 2. Si un provider falla, el sistema usará el fallback_provider si está configurado
+# 3. Para cambiar de perfil, modifica el valor de 'active_profile' arriba
+# 4. Puedes crear perfiles personalizados copiando uno existente
+# 5. Los timeouts son en segundos
+# 6. Temperature más bajo = respuestas más determinísticas
+# ============================================================================
+# PERFIL 5: BENCH_HF (Pruebas HF Inference con Thinking models)
+# ============================================================================
+bench_hf:
+  sentiment:
+    provider_type: "huggingface_inference"
+    model_name: "mistralai/Mistral-7B-Instruct-v0.2"
+    temperature: 0.5
+    max_tokens: 1800
+    timeout: 90
+    supports_vision: false
+    extra_config:
+      provider: "together"
+      inference_provider: "hf-inference"
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5:7b"
+
+  technical:
+    provider_type: "huggingface_inference"
+    model_name: "mistralai/Mistral-7B-Instruct-v0.2"
+    temperature: 0.3
+    max_tokens: 2048
+    timeout: 120
+    supports_vision: false
+    extra_config:
+      reasoning: "detailed"
+      provider: "together"
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "deepseek-r1:7b-qwen-distill-q4_K_M"
+
+  visual:
+    provider_type: "huggingface_inference"
+    model_name: "microsoft/Phi-3.5-vision-instruct"
+    temperature: 0.35
+    max_tokens: 1600
+    timeout: 150
+    supports_vision: true
+    extra_config:
+      detail: "high"
+      provider: "together"
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5vl:7b-q4_K_M"
+
+  risk_manager:
+    provider_type: "groq"
+    model_name: "llama-3.3-70b-versatile"
+    temperature: 0.2
+    max_tokens: 1800
+    timeout: 30
+    supports_vision: false
+    extra_config:
+      reasoning: "conservative"
+    fallback_provider_type: "ollama_local"
+    fallback_model_name: "qwen2.5:7b-instruct-q5_k_m"
+
+  qabba:
+    provider_type: "huggingface_inference"
+    model_name: "mistralai/Mistral-7B-Instruct-v0.2"
+    temperature: 0.4
+    max_tokens: 1200
+    timeout: 120
+    supports_vision: false
+    extra_config:
+      reasoning: "strategic"
+      provider: "together"
+    fallback_provider_type: "huggingface_inference"
+    fallback_model_name: "meta-llama/Llama-3.3-70B-Instruct"
+
+  decision:
+    provider_type: "huggingface_inference"
+    model_name: "mistralai/Mistral-7B-Instruct-v0.2"
+    temperature: 0.35
+    max_tokens: 2048
+    timeout: 150
+    supports_vision: false
+    extra_config:
+      reasoning: "balanced"
+      provider: "together"
+    fallback_provider_type: "together"
+    fallback_model_name: "Qwen/Qwen2.5-72B-Instruct"

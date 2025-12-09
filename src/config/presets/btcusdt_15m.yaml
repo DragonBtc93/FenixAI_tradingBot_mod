@@ -1,0 +1,88 @@
+# Preset estable para paper/live con BTCUSDT en 15m
+
+binance:
+  api_key: ""
+  api_secret: ""
+
+llm:
+  default_max_tokens: 900
+  default_temperature: 0.1
+  default_timeout: 45
+
+logging:
+  level: INFO
+  log_file: logs/fenix_live_trading.log
+
+risk_management:
+  base_risk_per_trade: 0.01       # 1%
+  max_risk_per_trade: 0.02        # 2%
+  min_risk_per_trade: 0.005       # 0.5%
+  atr_sl_multiplier: 1.5
+  atr_tp_multiplier: 3.0
+  min_reward_risk_ratio: 1.8
+  target_reward_risk_ratio: 2.2
+  max_consecutive_losses: 8
+  max_daily_loss_pct: 0.03        # 3%
+  max_trades_per_day: 20
+  volatility_adjustment_factor: 1.0
+  performance_adjustment_factor: 1.0
+  market_condition_factor: 1.0
+  time_of_day_factor: 1.0
+  confidence_adjustment_factor: 1.0
+
+technical_tools:
+  maxlen_buffer: 300
+  min_candles_for_reliable_calc: 150
+
+trading:
+  timeframe: 15m
+  active_timeframes:
+    - 15m
+    - 1h
+  base_asset: BTC
+  quote_asset: USDT
+  symbol: BTCUSDT
+  mode: paper
+  min_candles_for_bot_start: 150
+  order_status_initial_delay: 0.5
+  order_status_max_retries: 8
+  trade_cooldown_after_close_seconds: 120
+  sentiment_refresh_cooldown_seconds: 3600
+  tradingview_chart_urls:
+    15m: "https://es.tradingview.com/chart/?symbol=BINANCE%3ABTCUSDT&interval=15"
+    1h: "https://es.tradingview.com/chart/?symbol=BINANCE%3ABTCUSDT&interval=60"
+  use_testnet: false
+
+agents:
+  enabled:
+    technical: true
+    qabba: true
+    sentiment: false
+    visual: false
+    decision: true
+    risk: true
+  active_agents:
+    - technical
+    - qabba
+  agent_weights:
+    technical: 0.6
+    qabba: 0.4
+  consensus_threshold: 0.6   # Usado por DecisionAgent para gating de consenso
+  qabba:
+    focus_indicators:
+      - bollinger_bands
+      - rsi
+      - macd
+      - volume_analysis
+    disable_microstructure: false
+    disable_regime_analysis: false
+    simplified_mode: false
+
+performance:
+  cache_size: 1000
+  cache_ttl_seconds: 300
+  max_parallel_agents: 2
+  agent_timeout_seconds: 30
+  cleanup_interval_minutes: 5
+
+

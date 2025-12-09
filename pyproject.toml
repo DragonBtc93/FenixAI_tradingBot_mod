@@ -1,0 +1,147 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fenix-trading-bot"
+version = "0.1.0"
+description = "Fenix 2.0 trading system with modular AI agents and live execution."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "ganador" }
+]
+dependencies = [
+    "aiohttp>=3.8",
+    "asyncio-mqtt>=0.11",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "sentence-transformers>=3.0.1",
+    "pydantic>=2.0",
+    "python-dotenv>=1.0",
+    "requests>=2.31",
+    "structlog>=23.1",
+    "psutil>=5.9",
+    "websockets>=11.0",
+    "ccxt>=4.0",
+    "sqlalchemy>=2.0",
+    "redis>=4.6",
+    "arch>=8.0",
+    "PyYAML>=6.0",
+    "watchdog>=3.0",
+    "python-binance>=1.0.19",
+    "ta>=0.11",
+    "networkx>=3.0",
+    "dash-bootstrap-components>=2.0",
+    "cryptography>=41.0.0"
+]
+[project.optional-dependencies]
+ml = [
+    "scikit-learn>=1.3",
+    "xgboost>=1.7",
+    "lightgbm>=4.0",
+    "tensorflow>=2.13",
+    "torch>=2.0",
+    "optuna>=3.2",
+    "pymc>=5.6"
+]
+vision = [
+    "opencv-python>=4.8",
+    "pillow>=10.0",
+    "matplotlib>=3.7",
+    "plotly>=5.15",
+    "dash>=2.11",
+    "bokeh>=3.2",
+    "seaborn>=0.12"
+]
+monitoring = [
+    "prometheus-client>=0.17",
+    "uvicorn>=0.23",
+    "fastapi>=0.100",
+    "flask>=2.3"
+]
+dev = [
+    "black>=23.7",
+    "flake8>=6.0",
+    "ruff>=0.6",
+    "mypy>=1.4",
+    "pytest>=7.4",
+    "pytest-asyncio>=0.21",
+    "bandit>=1.7",
+    "sphinx>=7.1",
+    "myst-parser>=2.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.yml", "*.json"]
+
+# Exclude legacy and backup files from packaging
+[tool.setuptools.exclude-package-data]
+"*" = ["*.bak", "legacy/**/*", "backups/**/*"]
+
+# --- Testing Configuration ---
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--tb=short",
+    "--strict-markers",
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "slow: Slow tests",
+    "asyncio: Asyncio-based tests",
+]
+# Exclude legacy and backup files from test discovery
+norecursedirs = ["legacy", "build", "dist", ".git", "__pycache__", "*.egg-info"]
+
+# --- Code Style & Linting ---
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+exclude = '''
+/(
+    \.git
+  | build
+  | dist
+  | logs
+  | __pycache__
+  | legacy
+  | .*\.bak$
+)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = [
+    ".git",
+    "build",
+    "dist",
+    "legacy",
+    "*.bak",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "W",   # pycodestyle warnings
+    "I",   # isort (import order)
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line length (ya lo gestiona black/line-length)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]

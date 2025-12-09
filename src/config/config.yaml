@@ -1,0 +1,252 @@
+# Configuración Optimizada para Mejorar Win Rate
+# Basada en análisis de problemas identificados
+
+binance:
+  api_key: ''
+  api_secret: ''
+
+llm:
+  default_max_tokens: 12000  # Reducido para respuestas más concisas
+  default_temperature: 0.1  # Más determinístico
+  default_timeout: 120       # Reducido para mayor velocidad
+
+logging:
+  level: DEBUG
+  log_file: logs/fenix_live_trading.log
+
+# GESTIÓN DE RIESGO OPTIMIZADA PARA 5M ADAUSDT
+risk_management:
+  profile: aggressive
+  # Gestión de riesgo ajustada para 5m con ADA - OPTIMIZADO PARA ALTCOIN
+  base_risk_per_trade: 0.012         # 1.2% - Ligeramente mayor por volatilidad de ADA
+  max_risk_per_trade: 0.025          # 2.5% - Máximo ajustado para altcoin
+  min_risk_per_trade: 0.006          # 0.6% - Mínimo ajustado
+  
+  # ATR SL/TP OPTIMIZADO PARA ADA - PATRONES TÉCNICOS CLAROS
+  atr_sl_multiplier: 1.6             # REDUCIDO para ADA - Patrones más precisos
+  atr_tp_multiplier: 3.0             # MANTENIDO - Buena captura de movimientos
+  
+  # Ratios R:R optimizados para patrones técnicos de ADA
+  min_reward_risk_ratio: 1.8         # MANTENIDO - Selectivo pero realista
+  target_reward_risk_ratio: 2.8      # AUMENTADO - ADA tiene mejores movimientos
+  
+  # Límites ajustados para 5m timeframe
+  max_consecutive_losses: 5           # REDUCIDO de 20 - Más conservador
+  max_daily_loss_pct: 0.03          # 3% - Más conservador
+  max_trades_per_day: 20             # REDUCIDO de 50 - Calidad sobre cantidad
+  
+  # Factores de ajuste
+  volatility_adjustment_factor: 1.0
+  performance_adjustment_factor: 1.0
+  market_condition_factor: 1.0
+  time_of_day_factor: 1.0
+  confidence_adjustment_factor: 1.0
+
+  feedback_loop:
+    enabled: true
+    lookback_trades: 14
+    caution_drawdown_pct: 3.5
+    severe_drawdown_pct: 6.0
+    caution_daily_loss_pct: 1.8
+    severe_daily_loss_pct: 3.0
+    loss_streak_caution: 3
+    loss_streak_halt: 5
+    negative_avg_pnl_threshold: -15.0
+    hot_streak_win_rate: 0.7
+    hot_streak_min_trades: 6
+    hot_streak_min_avg_pnl: 18.0
+    caution_cooldown_seconds: 240
+    severe_cooldown_seconds: 900
+    cooldown_risk_bias: 0.65
+    drawdown_risk_bias: 0.4
+    hot_streak_risk_bias: 1.15
+
+  risk_profiles:
+    conservative:
+      base_risk_per_trade: 0.007
+      max_risk_per_trade: 0.015
+      min_risk_per_trade: 0.003
+      atr_sl_multiplier: 1.9
+      atr_tp_multiplier: 2.6
+      min_reward_risk_ratio: 2.0
+      target_reward_risk_ratio: 3.2
+      max_daily_loss_pct: 0.02
+      max_consecutive_losses: 4
+      max_trades_per_day: 12
+      volatility_adjustment_factor: 0.9
+      performance_adjustment_factor: 0.95
+      market_condition_factor: 0.9
+      time_of_day_factor: 0.95
+      confidence_adjustment_factor: 0.9
+
+    moderate:
+      base_risk_per_trade: 0.01
+      max_risk_per_trade: 0.02
+      min_risk_per_trade: 0.005
+      atr_sl_multiplier: 1.7
+      atr_tp_multiplier: 2.8
+      min_reward_risk_ratio: 1.9
+      target_reward_risk_ratio: 3.0
+      max_daily_loss_pct: 0.03
+      max_consecutive_losses: 5
+      max_trades_per_day: 18
+      volatility_adjustment_factor: 1.0
+      performance_adjustment_factor: 1.0
+      market_condition_factor: 1.0
+      time_of_day_factor: 1.0
+      confidence_adjustment_factor: 1.0
+
+    aggressive:
+      base_risk_per_trade: 0.012
+      max_risk_per_trade: 0.025
+      min_risk_per_trade: 0.006
+      atr_sl_multiplier: 1.6
+      atr_tp_multiplier: 3.0
+      min_reward_risk_ratio: 1.8
+      target_reward_risk_ratio: 2.8
+      max_daily_loss_pct: 0.035
+      max_consecutive_losses: 6
+      max_trades_per_day: 24
+      volatility_adjustment_factor: 1.1
+      performance_adjustment_factor: 1.05
+      market_condition_factor: 1.1
+      time_of_day_factor: 1.05
+      confidence_adjustment_factor: 1.1
+
+technical_analysis:
+  thresholds:
+    rsi:
+      oversold: 30
+      overbought: 70
+      extreme_oversold: 20
+      extreme_overbought: 80
+    adx:
+      weak: 20
+      strong: 40
+      very_strong: 60
+    atr_percentile:
+      low: 20
+      high: 80
+    volume_ratio:
+      low: 0.5
+      high: 1.5
+      very_high: 2.0
+
+technical_tools:
+  maxlen_buffer: 200                # Reducido para mayor eficiencia
+  min_candles_for_reliable_calc: 50 # Mantenido
+
+tools:
+  chart_generator:
+    charts_dir: logs/charts
+    save_charts_to_disk: true
+  news_scraper:
+    cryptopanic_api_tokens:
+    - a1125cef0b98fef468f801cf059a6472d306464f
+
+# CONFIGURACIÓN DE TRADING OPTIMIZADA
+trading:
+  # Timeframe principal optimizado
+  timeframe: 5m                     # Timeframe principal 5m para live trading
+  
+  # Timeframes activos reducidos
+  active_timeframes:
+  - 5m                              # Mantener solo el timeframe principal para evitar modo multi-TF
+  
+  # Configuración de símbolo
+  base_asset: ADA                   # Cambiado a ADA - Cardano
+  quote_asset: USDT
+  symbol: ADAUSDT                   # Cambiado a ADAUSDT - Patrones técnicos claros
+  
+  # Parámetros operativos
+  mode: live
+  min_candles_for_bot_start: 50
+  order_status_initial_delay: 0.3   # Reducido para mayor velocidad
+  order_status_max_retries: 5       # Reducido
+  
+  # Cooldowns optimizados para 5m ADA - MEJORA CRÍTICA
+  trade_cooldown_after_close_seconds: 45    # <1 minuto: más agresivo para paper trading
+  trade_cooldown_after_loss_seconds: 180    # 3 minutos después de pérdida
+  sentiment_refresh_cooldown_seconds: 1200  # 20 minutos - MÁS FRECUENTE para altcoin
+  
+  # Filtros de calidad de señal - NUEVOS PARÁMETROS
+  min_signal_strength: 0.7               # Mínimo 70% de confianza
+  min_confluence_score: 0.6              # Mínimo 60% de confluencia
+  
+  # Horarios optimizados para BTC (UTC) - NUEVO
+  active_trading_hours:
+    start: "08:00"                       # Londres abre
+    end: "20:00"                         # NY cierra
+  avoid_news_minutes: 30                 # Evitar 30min antes/después de noticias
+  
+  # URLs de TradingView actualizadas
+  tradingview_chart_urls:
+    5m: "https://es.tradingview.com/chart/iERzAcI8/?symbol=BINANCE%3AADAUSDT&interval=5"
+    15m: "https://es.tradingview.com/chart/iERzAcI8/?symbol=BINANCE%3AADAUSDT&interval=15"
+  
+  use_testnet: false
+
+# CONFIGURACIÓN DE AGENTES - TODOS ACTIVADOS PARA TESTING HÍBRIDO
+agents:
+  enabled:
+    technical: true      # ✅ Activado - DeepSeek-V3.2-Exp
+    qabba: true          # ✅ Activado - DeepSeek-V3.2-Exp
+    sentiment: true      # ✅ Activado - mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis
+    visual: true         # ✅ Activado - Qwen3-VL-235B-A22B-Instruct
+    decision: true       # ✅ Activado
+    risk: true           # ✅ Activado
+  
+  # Todos los agentes activos
+  active_agents:
+  - technical              # Análisis técnico avanzado
+  - qabba                  # Análisis cuantitativo
+  - sentiment              # Análisis de sentimiento
+  - visual                 # Análisis visual de charts
+  
+  # Pesos balanceados
+  agent_weights:
+    technical: 0.35        # 35% técnico
+    qabba: 0.30           # 30% QABBA
+    sentiment: 0.20        # 20% sentimiento
+    visual: 0.15           # 15% visual
+  
+  # Umbral de consenso más bajo
+  consensus_threshold: 0.65         # Reducido para permitir más trades
+  
+  # Configuración QABBA simplificada
+  qabba:
+    focus_indicators:
+    - bollinger_bands
+    - rsi
+    - macd
+    - volume_analysis
+    
+    # Desactivar análisis complejos
+    disable_microstructure: false
+    disable_regime_analysis: false
+    simplified_mode: false
+
+# OPTIMIZACIONES DE PERFORMANCE - MEJORAS CRÍTICAS
+performance:
+  # Cache optimizado para 5m ADA
+  cache_size: 1200                  # AJUSTADO para ADA - Menor que BTC pero eficiente
+  cache_ttl_seconds: 150           # 2.5 minutos - Más frecuente para altcoin
+  precompute_indicators: true       # NUEVO - Pre-calcular indicadores comunes
+  
+  # Procesamiento paralelo mejorado
+  max_parallel_agents: 6           # AUMENTADO para todos los agentes
+  enable_parallel_processing: true  # NUEVO - Activar procesamiento paralelo
+  
+  # Timeouts más agresivos - MEJORA CRÍTICA
+  agent_timeout_seconds: 15        # REDUCIDO de 30 a 15 - Más agresivo
+  api_timeout_seconds: 10          # NUEVO - Timeout para APIs
+  
+  # Limpieza y sincronización mejorada
+  cleanup_interval_minutes: 5      # Cada 5 minutos
+  sync_positions_interval_seconds: 30  # NUEVO - Sincronizar con Binance cada 30s
+  
+  # Circuit breaker para robustez - NUEVO
+  circuit_breaker:
+    failure_threshold: 5            # Máximo 5 fallos consecutivos
+    recovery_timeout_seconds: 60    # 1 minuto para recuperación
+    half_open_max_calls: 3          # Máximo 3 llamadas en estado semi-abierto

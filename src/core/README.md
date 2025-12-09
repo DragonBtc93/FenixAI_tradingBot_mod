@@ -1,0 +1,3 @@
+# src/core
+
+Funcionalidades core

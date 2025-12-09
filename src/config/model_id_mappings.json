@@ -1,0 +1,10 @@
+{
+  "qwen3-vl:8b|huggingface": "Qwen/Qwen3-VL-8B-Instruct",
+  "qwen3-vl:8b|mlx": "lmstudio-community/Qwen3-VL-8B-Instruct-MLX-8bit",
+  "qwen3:8b|huggingface": "Qwen/Qwen3-8B-Instruct",
+  "qwen3:8b|mlx": "mlx-community/Qwen3-8B-4bit",
+  "gemma3:4b|mlx": "mlx-community/gemma-3-4b-it-4bit",
+  "gemma3:4b|huggingface": "google/gemma-3-4b-it",
+  "llama2:7b|huggingface": "meta-llama/Llama-2-7b-chat-hf",
+  "llama2:7b|mlx": "mlx-community/Llama-2-7b-chat-4-bit"
+}

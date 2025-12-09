@@ -1,0 +1,164 @@
+# Configuración del Sistema de Mejoras Fenix Trading Bot
+# Archivo: config/system_improvements_config.yaml
+
+# Gestión Segura de Secretos
+secrets_management:
+  enabled: true
+  encryption_key_env: "FENIX_ENCRYPTION_KEY"  # Variable de entorno para la clave de cifrado
+  vault_file: "security/secrets_vault.enc"
+  auto_rotation_hours: 24
+  emergency_lockdown_enabled: true
+  ttl_default_hours: 12
+
+# Circuit Breakers Universales
+circuit_breakers:
+  enabled: true
+  default_config:
+    failure_threshold: 5
+    recovery_timeout_seconds: 60
+    half_open_max_calls: 3
+    success_threshold: 2
+  
+  services:
+    binance_api:
+      failure_threshold: 3
+      recovery_timeout_seconds: 30
+      fallback_strategy: "cache_last_known"
+    
+    llm_services:
+      failure_threshold: 2
+      recovery_timeout_seconds: 120
+      fallback_strategy: "simplified_analysis"
+    
+    mlx_inference:
+      failure_threshold: 2
+      recovery_timeout_seconds: 90
+      fallback_strategy: "cpu_fallback"
+
+# Gestión Avanzada de Memoria
+memory_management:
+  enabled: true
+  thresholds:
+    warning_gb: 4.0
+    critical_gb: 6.0
+    emergency_gb: 8.0
+  
+  monitoring_interval_seconds: 30
+  auto_cleanup_enabled: true
+  mlx_memory_tracking: true
+  
+  cleanup_strategies:
+    - "clear_old_cache"
+    - "release_unused_models"
+    - "compact_memory_pools"
+
+# Sistema de Logging Estructurado
+structured_logging:
+  enabled: true
+  log_level: "INFO"
+  
+  handlers:
+    json_file:
+      enabled: true
+      file_path: "logs/structured/fenix_structured.jsonl"
+      max_size_mb: 100
+      backup_count: 5
+    
+    security_file:
+      enabled: true
+      file_path: "logs/security/fenix_security.log"
+      max_size_mb: 50
+      backup_count: 10
+    
+    performance_file:
+      enabled: true
+      file_path: "logs/performance/fenix_performance.log"
+      max_size_mb: 50
+      backup_count: 5
+    
+    console:
+      enabled: true
+      colored: true
+      level: "INFO"
+  
+  sensitive_data_filter:
+    enabled: true
+    patterns:
+      - "api_key"
+      - "secret"
+      - "password"
+      - "token"
+
+# Cache Inteligente
+intelligent_cache:
+  enabled: true
+  default_strategy: "adaptive"
+  max_memory_mb: 512
+  cleanup_interval_seconds: 300
+  
+  strategies:
+    adaptive:
+      access_threshold: 3
+      time_weight: 0.7
+      frequency_weight: 0.3
+    
+    lru:
+      enabled: true
+    
+    ttl:
+      default_ttl_seconds: 3600
+
+# Procesamiento Paralelo Avanzado
+parallel_processing:
+  enabled: true
+  default_mode: "thread"
+  max_workers: 1
+  task_timeout_seconds: 300
+  
+  resource_monitoring:
+    enabled: true
+    cpu_threshold_percent: 80
+    memory_threshold_percent: 85
+    check_interval_seconds: 10
+  
+  load_balancing:
+    strategy: "least_loaded"
+    health_check_interval_seconds: 30
+
+# Monitoreo y Métricas
+monitoring:
+  enabled: true
+  metrics_collection_interval_seconds: 60
+  health_check_interval_seconds: 30
+  
+  alerts:
+    enabled: true
+    thresholds:
+      high_memory_gb: 6.0
+      low_api_success_rate: 0.8
+      high_response_time_ms: 5000
+      high_error_rate: 0.1
+  
+  dashboard:
+    enabled: false  # Será implementado en fases posteriores
+    port: 8080
+
+# Configuración de Desarrollo/Producción
+environment:
+  mode: "development"  # "development" o "production"
+  debug_enabled: true
+  performance_profiling: true
+  detailed_error_logging: true
+
+# Configuración de Respaldo y Recuperación
+backup_recovery:
+  enabled: true
+  auto_backup_interval_hours: 6
+  backup_retention_days: 30
+  backup_directory: "backups/system_state"
+  
+  components_to_backup:
+    - "cache_state"
+    - "circuit_breaker_state"
+    - "performance_metrics"
+    - "error_logs"

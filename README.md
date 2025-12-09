@@ -1,160 +1,604 @@
 <div align="center">
-  <strong style="color:red;">⚠️ WARNING: This is a BETA project. Fenix is under active development, is not yet profitable, and may not work as expected. Use at your own risk!</strong>
+
+# 🦅 FenixAI Trading Bot v2.0
+
+### Autonomous Multi-Agent Cryptocurrency Trading System with Self-Evolving Memory
+
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![LangGraph](https://img.shields.io/badge/Orchestration-LangGraph-green.svg)](https://langchain-ai.github.io/langgraph/)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![FastAPI](https://img.shields.io/badge/API-FastAPI-009688.svg)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/Frontend-React_18-61DAFB.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6.svg)](https://www.typescriptlang.org/)
+[![Binance](https://img.shields.io/badge/Exchange-Binance_Futures-F0B90B.svg)](https://www.binance.com/)
+[![arXiv](https://img.shields.io/badge/arXiv-2509.25140-b31b1b.svg)](https://arxiv.org/abs/2509.25140)
+[![TailwindCSS](https://img.shields.io/badge/Styling-TailwindCSS-38B2AC.svg)](https://tailwindcss.com/)
+[![Socket.IO](https://img.shields.io/badge/Realtime-Socket.IO-010101.svg)](https://socket.io/)
+
+*An advanced trading system powered by multiple specialized AI agents that collaborate to analyze markets, manage risk, and execute trades on Binance Futures. Features ReasoningBank memory system for self-evolving agent capabilities.*
+
+![Fenix Dashboard Preview](./Dashboard%20Fenix.png)
+
+[📖 Documentation](./docs/) · [🚀 Quick Start](#-quick-start) · [🏗️ Architecture](#-architecture) · [📝 Changelog](./docs/CHANGELOG.md) · [📄 Paper](https://arxiv.org/abs/2509.25140)
+
 </div>
 
 ---
 
-<div align="center">
-  <em>
-    Hi! I'm Giovanni, but I prefer to be called Ganador. This is my second project. For the last two months, I've been researching the latest in AI and algorithmic trading to develop Fenix. It's not perfect yet, it's not profitable, and there are still many things to improve. But after so much research, I'm convinced that Fenix's path is a tough and underdeveloped one that could surpass ordinary bots and reach the state of the art. I publish my project hoping it will be useful to someone, and I truly hope we can make Fenix rise and work as I dream.
-  </em>
-</div>
+> **⚠️ WARNING: This is a BETA project.** Fenix is under active development, is not yet profitable, and may not work as expected. Use at your own risk!
+
+### 🦅 A Message from the Creator (v2.0)
+
+Hello, it has been 6 months since I launched the first version of Fenix. I have been on an incredible journey for six months, learning a ton about programming, LLMs, AI papers, and above all, experimenting a lot with Fenix.
+
+I have been doing hundreds of tests with both paper trading and live trading, testing different LLM configurations, different cryptocurrencies, different timeframes, adding and removing more agents, and I have learned a lot. I believe the main advantage of Fenix is that it evolves over time along with LLMs; they are getting smarter and it shows in their trading decisions.
+
+So far, the best performance I have obtained is with large models of over 50b, but the main problem is that they are expensive and difficult to maintain privacy. I think the best option currently between price/privacy and large models is the Ollama cloud models which are expanding more and more, but without a doubt, I believe the best option will be to fine-tune several small models. Right now I am experimenting with that configuration.
+
+But I didn't want to leave you any longer without updates, so this is **Version 2.0**. It now includes a nice and intuitive local page to make it more accessible to use. Regarding performance, what has improved the most is undoubtedly the **Reasoning Bank**; it helps agents not to make the same mistakes repeatedly and also to be right more often thanks to remembering. I am also experimenting with the new HOPE model that learns as it is used, but I still don't have a clear result to share.
+
+While I continue investigating and improving Fenix, I hope this new version can be useful to at least one person as inspiration or to test the new limits of trading.
+
+Thank you for taking the time to read my words. I would appreciate it if you leave me a star, a comment in discussion, a contribution, advice, or some change on my BuyMeACoffee page.
+
+Thank you very much,
+**Ganador**
 
 ---
 
-# Fenix Trading Bot
+## ⭐ Star History
 
-## 📜 The Fenix Philosophy: Beyond Just a Bot
-
-In a financial market that never sleeps, information overload is a trader's greatest enemy. Traditional bots are limited to tracking technical indicators, ignoring the context, sentiment, and real-world events that truly move prices.
-
-Fenix is born from a different idea: to replicate and enhance the process of an elite team of analysts. Instead of a single algorithm, Fenix deploys a crew of AI agents, each an expert in a different domain. Like the mythical bird, the system is reborn with each analysis cycle, processing fresh information from all angles to make informed, robust, and adaptive decisions.
-
-This isn't just a bot; it's a framework for automated market intelligence.
-
----
-
-## 🧠 Collective Intelligence Architecture
-
-The core of Fenix is a workflow orchestrated by CrewAI, where information flows through a collaborative and competitive analysis process.
-
-### 📊 Data Acquisition Layer
-- **Market & Chart Data:** OHLCV prices, indicators, and high-resolution visual snapshots from TradingView.
-- **Text Intelligence:** Financial news from multiple sources and the social pulse from platforms like Twitter and Reddit.
-- **Sentiment Metrics:** The "Fear & Greed" index and other consolidated metrics.
-
-### 🕵️‍♂️ The AI Analysis Crew
-The data is processed by a team of specialized agents, each powered by an LLM optimized for its task:
-
-- **VisualAnalystAgent:** Uses a vision model (LLaVA) to read price charts. Identifies candlestick patterns, chart formations (H&S, triangles), and support/resistance levels invisible to purely numerical analysis.
-- **TechnicalAnalystAgent:** The quantitative expert. Processes raw market data to analyze an arsenal of indicators (RSI, MACD, Bollinger Bands, etc.) and determine the strength and direction of the trend from a mathematical perspective.
-- **SentimentAgent:** The market psychologist. Reads and understands the natural language of news and social media to gauge the overall sentiment, distinguishing between euphoria, panic, or neutrality.
-- **QABBAValidatorAgent:** A quality assurance agent. Validates the coherence and logic of the reports generated by the other agents, ensuring the conclusions are not contradictory or illogical.
-
-### 🛡️ Consensus & Guardian Oversight
-- **ConsensusAgent:** Acts as the head of strategy. Receives all validated reports and has the complex task of weighing all evidence to form a market thesis and propose an action (BUY, SELL, HOLD).
-- **TradeGuardianAgent:** The final supervisor and risk manager. Implements the "circuit breakers" and capital management rules. Reviews the ConsensusAgent's proposal and gives the final approval only if it aligns with user-defined risk parameters (e.g., volatility, max drawdown).
-
-### ⚙️ Execution & Memory
-Once a trade is approved, the system executes it and learns from it.
-- **PaperTradingSystem:** A high-fidelity simulator that models latency, slippage, and fees for realistic testing.
-- **TradeMemory:** All trades and the agent reasonings that led to them are stored, creating an invaluable database for performance analysis and continuous strategy improvement.
+<a href="https://star-history.com/#Ganador1/FenixAI_tradingBot&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Ganador1/FenixAI_tradingBot&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Ganador1/FenixAI_tradingBot&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Ganador1/FenixAI_tradingBot&type=Date" />
+ </picture>
+</a>
 
 ---
 
-## ✨ Standout Features
+## ✨ What's New in v2.0
 
-- 🤖 **Heterogeneous Agent Architecture:** Advanced orchestration with CrewAI, selecting the best LLM for each specific task.
-- 👁️ **Visual Chart Analysis:** A pioneering capability in the open-source space for an AI to natively read and interpret chart patterns.
-- 🧠 **Local & Private Intelligence:** Runs on Ollama, ensuring your strategies and data never leave your machine.
-- 🛡️ **Multi-Layered Security:** From agent logic validation (QABBA) to circuit breakers (TradeGuardian), safety is a core design pillar.
-- 🧪 **Realistic Testing Environment:** The paper trading mode simulates real-world market imperfections for reliable strategy validation.
-- 🔧 **Highly Configurable & Extensible:** Designed from the ground up to be modular, allowing users to easily add new agents, tools, or strategies.
+> **Complete architectural overhaul** - Migrated from CrewAI to **LangGraph** for more robust and flexible agent orchestration.
+
+| Feature | v1.0 (June 2025) | v2.0 (December 2025) |
+|---------|------------------|---------------------|
+| **Orchestration** | CrewAI | LangGraph (State Machine) |
+| **Memory System** | Basic TradeMemory | [ReasoningBank](https://arxiv.org/abs/2509.25140) + LLM-as-Judge |
+| **Visual Analysis** | Static screenshots | Chart Generator + Playwright TradingView Capture |
+| **LLM Providers** | Ollama only | Ollama, MLX, Groq, HuggingFace |
+| **Frontend** | Flask Dashboard | React + Vite + TypeScript |
+| **Agent Weighting** | Static | Dynamic (performance-based) |
+| **Security** | Basic | SecureSecretsManager + Path Validation |
+| **Real-time** | Polling | WebSocket + Socket.IO |
+
+### Notable security and developer workflow improvements
+- API binds to `127.0.0.1` by default to avoid accidental public exposure. To bind to all interfaces intentionally, set `ALLOW_EXPOSE_API=true`.
+- Demo accounts are not seeded by default; set `CREATE_DEMO_USERS=true` for local development.
+- `DEFAULT_DEMO_PASSWORD` and `DEFAULT_ADMIN_PASSWORD` may be used for local testing; avoid using them in production.
+- We added `DEVELOPMENT.md` and `RELEASE_CHECKLIST.md` to help developers follow the release process and avoid secrets leaks.
+- Archived internal reports are now in `docs/archives/reports/` to reduce root clutter.
 
 ---
 
-## 💻 Tech Stack
+## 🧠 How It Works
 
-Fenix is built on the cutting edge of the Python and AI ecosystem:
+FenixAI employs a **multi-agent architecture** where specialized AI agents collaborate to make trading decisions. The system is built on three core pillars:
 
-- **Agent Orchestration:** CrewAI
-- **Local AI Models:** Ollama (LLaVA, Mixtral, Qwen)
-- **Web Scraping & Automation:** Selenium, BeautifulSoup4, Tweet-Harvest
-- **Data Analysis:** Pandas, NumPy, Pandas-TA
-- **Visualization:** Matplotlib, mplfinance
-- **Exchange Interaction:** CCXT
-- **Foundations:** Pydantic, python-dotenv, Loguru
+1. **Multi-Agent Collaboration**: Specialized agents analyze different aspects of the market
+2. **Self-Evolving Memory**: ReasoningBank enables agents to learn from past decisions
+3. **Dynamic Risk Management**: Real-time circuit breakers and position sizing
+
+### 🧪 ReasoningBank: Self-Evolving Agent Memory
+
+FenixAI implements the **ReasoningBank** architecture based on the research paper ["ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory"](https://arxiv.org/abs/2509.25140). This novel memory framework:
+
+- **Distills reasoning strategies** from successful and failed trading decisions
+- **Semantic retrieval** of relevant historical context during analysis
+- **LLM-as-Judge** evaluates decision quality and provides feedback
+- **Continuous learning** enables agents to improve over time
+- **Embeddings-based search** finds similar market conditions from history
+
+```python
+# Example: Agent retrieves relevant context from ReasoningBank
+context = reasoning_bank.get_relevant_context(
+    agent_name="technical_analyst",
+    current_prompt=market_analysis_prompt,
+    limit=3
+)
+# Agent uses historical insights to make better decisions
+```
+
+### 📊 Visual Analysis System
+
+The Visual Agent supports two modes for chart analysis:
+
+| Mode | Description | Use Case |
+|------|-------------|----------|
+| **Chart Generator** | Generates charts with indicators using `mplfinance` | Fast, offline, customizable |
+| **Playwright Capture** | Captures TradingView screenshots via browser automation | Real TradingView charts, advanced indicators |
+
+Both modes produce base64-encoded images that are analyzed by vision-capable LLMs (LLaVA, GPT-4V, etc.).
+
+![Fenix Agent Architecture](./docs/images/architecture_v2.png)
+
+### 🤖 The Agent Team
+
+| Agent | Responsibility | Inputs | Output |
+|-------|---------------|--------|--------|
+| **Technical Analyst** | RSI, MACD, ADX, SuperTrend, EMA crossovers | OHLCV data, indicators | Signal + confidence |
+| **Visual Analyst** | Chart pattern recognition, support/resistance | Generated charts / TradingView screenshots | Pattern analysis |
+| **Sentiment Analyst** | News, Twitter, Reddit, Fear & Greed Index | Social feeds, news APIs | Market sentiment |
+| **QABBA Agent** | Bollinger Bands, volatility, squeeze detection, OBI, CVD | Microstructure data | Volatility signal |
+| **Decision Agent** | Weighted consensus from all agents | All agent reports | Final trade decision |
+| **Risk Manager** | Circuit breakers, position sizing, drawdown limits | Portfolio state, decision | Approved/vetoed trade |
+
+### 🔄 Agent Workflow
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              FENIX AI v2.0                                  │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ┌─────────────┐    ┌──────────────────────────────────────────────────┐    │
+│  │   Frontend  │◄──►│              FastAPI + Socket.IO                 │    │
+│  │  React/Vite │    │                  (Real-time)                     │    │
+│  └─────────────┘    └────────────────────┬─────────────────────────────┘    │
+│                                          │                                  │
+│  ┌───────────────────────────────────────▼──────────────────────────────┐   │
+│  │                      TRADING ENGINE                                  │   │
+│  │  ┌─────────────────────────────────────────────────────────────────┐ │   │
+│  │  │                 LangGraph Orchestrator                          │ │   │
+│  │  │                   (State Machine)                               │ │   │
+│  │  └─────────────────────────────────────────────────────────────────┘ │   │
+│  │           │              │              │              │             │   │
+│  │     ┌─────▼─────┐  ┌─────▼─────┐  ┌─────▼─────┐  ┌─────▼─────┐       │   │
+│  │     │ Technical │  │  Visual   │  │ Sentiment │  │   QABBA   │       │   │
+│  │     │  Agent    │  │  Agent    │  │  Agent    │  │  Agent    │       │   │
+│  │     └─────┬─────┘  └─────┬─────┘  └─────┬─────┘  └─────┬─────┘       │   │
+│  │           │              │              │              │             │   │
+│  │     ┌─────▼──────────────▼──────────────▼──────────────▼─────┐       │   │
+│  │     │              Decision Agent + Risk Manager             │       │   │
+│  │     │           (Dynamic Weighting + LLM-as-Judge)           │       │   │
+│  │     └────────────────────────┬───────────────────────────────┘       │   │
+│  └──────────────────────────────┼───────────────────────────────────────┘   │
+│                                 │                                           │
+│  ┌──────────────────────────────▼───────────────────────────────────────┐   │
+│  │                         MEMORY LAYER                                 │   │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────────┐   │   │
+│  │  │  ReasoningBank  │  │  Trade Memory   │  │   LLM-as-Judge      │   │   │
+│  │  │ (Semantic Search)│ │   (History)     │  │  (Self-Evaluation)  │   │   │
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────────┘   │   │
+│  └──────────────────────────────────────────────────────────────────────┘   │
+│                                                                             │
+│  ┌──────────────────────────────────────────────────────────────────────┐   │
+│  │                        EXECUTION LAYER                               │   │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────────┐   │   │
+│  │  │  Binance Client │  │  Order Executor │  │   Market Data       │   │   │
+│  │  │ (REST + WS)     │  │  (Paper/Live)   │  │   (Real-time)       │   │   │
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────────┘   │   │
+│  └──────────────────────────────────────────────────────────────────────┘   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+## 🌟 Key Features
+
+### Multi-Agent Collaboration
+
+- 🤖 **6 Specialized Agents** working in parallel and sequence
+- 🔄 **Dynamic Weighting** based on agent performance history
+- 🎯 **Consensus-Based Decisions** with configurable thresholds
+
+### Self-Evolving Memory (ReasoningBank)
+
+- 🧠 **Semantic Memory Search** using embeddings
+- 📝 **Experience Distillation** from successes and failures
+- ⚖️ **LLM-as-Judge** for decision quality evaluation
+- 📈 **Continuous Improvement** over time
+
+### Visual Analysis
+
+- 📊 **Chart Generator** with mplfinance (RSI, MACD, Bollinger, etc.)
+- 🖼️ **TradingView Capture** via Playwright browser automation
+- 👁️ **Vision LLM Integration** (LLaVA, GPT-4V compatible)
+
+### Multi-Provider LLM Support
+
+- 🦙 **Ollama** - Local inference with any GGUF model
+- 🍎 **MLX** - Apple Silicon optimized (M1/M2/M3)
+- ⚡ **Groq** - Ultra-fast cloud inference
+- 🤗 **HuggingFace** - Serverless inference API
+
+### Trading Features
+
+- 📈 **Binance Futures** integration (testnet & live)
+- 🛡️ **Paper Trading** mode by default
+- ⚠️ **Circuit Breakers** for risk management
+- 📊 **Multi-Timeframe Analysis** support
+
+### Real-Time Dashboard
+
+- 🌐 **React + TypeScript** modern frontend
+- 🔌 **WebSocket** real-time updates
+- 📱 **Responsive Design** with TailwindCSS
+- 📊 **Live Charts** and agent performance metrics
 
 ---
 
-🖥️ System Requirements
-The system is designed to run on consumer-grade hardware. These are the recommended specifications for an optimal experience.
-Operating System: macOS (Apple Silicon recommended) or Linux.
-CPU: An Apple Silicon chip (M1/M2/M3/M4) is recommended due to optimizations. A modern Intel/AMD processor should also work.
-RAM: 16 GB is the recommended minimum. The system is engineered to run within this limit thanks to dynamic memory management. 8 GB may struggle significantly.
-Disk Space: At least 25-30 GB of free space to install Ollama and the various language models.
+## 🚀 Quick Start
 
-## 🏁 Quickstart Guide
+### Prerequisites
 
-**Clone the Repository:**
+| Requirement | Version | Notes |
+|-------------|---------|-------|
+| Python | 3.10+ | 3.11 recommended |
+| Node.js | 18+ | For frontend |
+| Ollama | Latest | Local LLM inference |
+| RAM | 16GB+ | 32GB for larger models |
+| GPU | Optional | CUDA for faster inference |
+| Apple Silicon | M1/M2/M3 | MLX support for optimized inference |
+
+### Optional Services
+
+- **Binance Account** - For live/testnet trading
+- **Groq API Key** - For cloud LLM inference
+- **HuggingFace Token** - For HF Inference API
+- **Playwright** - For TradingView chart capture
+
+### Installation
+
 ```bash
+# Clone the repository
 git clone https://github.com/Ganador1/FenixAI_tradingBot.git
-cd fenixtradingbot
+cd FenixAI_tradingBot
+
+# Create and activate virtual environment
+python -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+
+# Install dependencies
+pip install -e ".[dev,vision,monitoring]"
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your API keys
+
+# Pull required Ollama models
+ollama pull qwen3:8b
 ```
 
-**Set Up the Virtual Environment:**
+### Running FenixAI
+
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+# Terminal 1: Start the backend with API
+python run_fenix.py --api
+
+# Terminal 2: Start the frontend
+cd frontend && npm install && npm run client:dev
 ```
 
-**Install Dependencies:**
-```bash
-pip install -r requirements.txt
-```
+Access the dashboard at: **http://localhost:5173**
 
-**Set Up Ollama & Models:**
-Ensure Ollama is installed. Then, pull the required models:
-```bash
-ollama pull llava
-ollama pull mixtral
-ollama pull qwen:7b
-```
-Refer to the 📖 Full Installation Guide for more details.
-
-**Configure Fenix:**
-Create your personal configuration file from the template:
-```bash
-cp config/config.example.yaml config/config.yaml
-```
-Open `config/config.yaml` and adjust the crypto pairs, timeframe, and your API keys if you plan to trade live.
+Note: For safety, the API will bind to 127.0.0.1 by default. To allow external binding, set `ALLOW_EXPOSE_API=true`.
+If you want to enable demo accounts for local development, set `CREATE_DEMO_USERS=true` and (optionally) `DEFAULT_DEMO_PASSWORD` to control the demo password. Avoid enabling demo users in production.
 
 ---
 
-## 🕹️ Operations Manual
+## 🔐 Release v2.0 & Security Highlights
 
-- **🧪 Paper Trading (Simulated & Recommended Mode):**
-  Validate your strategies in a safe, realistic environment.
-  ```bash
-  python run_paper_trading.py
-  ```
-- **🚀 Live Trading (Real Mode):**
-  ⚠️ Extreme Caution! Use only after extensive validation and at your own risk.
-  ```bash
-  python live_trading.py
-  ```
-- **⏪ Backtesting:**
-  Quickly test ideas against historical data.
-  ```bash
-  python backtest.py --symbol BTC/USDT --timeframe 4h
-  ```
+- This release improves security defaults: API binds to `127.0.0.1` by default, demo users are gated, and secrets scanning is included in the developer workflow.
+- Please follow `RELEASE_CHECKLIST.md` before final releases. Dev-focused run instructions are in `DEVELOPMENT.md`.
+- Archived development reports can be found in `docs/archives/reports/`.
+- Demo credentials information moved to: `docs/security/docs/security/DEMO_CREDENTIALS.md`.
 
----
+### CLI Options
 
-## 🤝 Become a Contributor!
+```bash
+python run_fenix.py --help
 
-Fenix is an ambitious open-source project. If you are passionate about the intersection of AI, finance, and programming, your contribution is welcome.
-
-Check out our Contribution Guide to learn how you can help improve the code, propose new features, or enhance the documentation.
+python run_fenix.py                      # Paper trading (default)
+python run_fenix.py --symbol ETHUSDT     # Different symbol
+python run_fenix.py --timeframe 5m       # Different timeframe
+python run_fenix.py --no-visual          # Disable visual agent
+python run_fenix.py --mode live --allow-live  # Live trading (⚠️ real money)
+```
 
 ---
 
-## ⚖️ License
+## 🏗️ Architecture
 
-Distributed under the Apache 2.0 License. A permissive and professional license that encourages both community collaboration and adoption in commercial projects.
+### Project Structure
+
+```
+FenixAI/
+├── run_fenix.py              # Main entry point
+├── pyproject.toml            # Python project configuration
+├── package.json              # Node.js dependencies (API)
+│
+├── src/
+│   ├── analysis/             # Technical analysis modules
+│   ├── api/                  # FastAPI server & WebSocket
+│   ├── cache/                # Caching utilities
+│   ├── core/                 # LangGraph orchestrator
+│   │   └── langgraph_orchestrator.py
+│   ├── dashboard/            # Trading dashboard backend
+│   ├── inference/            # Multi-provider LLM clients
+│   │   ├── providers/        # Ollama, MLX, Groq, HuggingFace
+│   │   ├── reasoning_judge.py
+│   │   └── unified_inference_client.py
+│   ├── memory/               # Memory systems
+│   │   ├── reasoning_bank.py # ReasoningBank implementation
+│   │   └── trade_memory.py   # Trade history storage
+│   ├── models/               # Data models & schemas
+│   ├── monitoring/           # System monitoring
+│   ├── pipeline/             # Data processing pipelines
+│   ├── prompts/              # Agent prompt templates
+│   ├── risk/                 # Risk management module
+│   ├── services/             # External service integrations
+│   ├── tools/                # Agent tools
+│   │   ├── chart_generator.py           # Chart generation with mplfinance
+│   │   ├── chart_generator_playwright.py
+│   │   ├── tradingview_playwright_capture.py
+│   │   ├── fear_greed.py                # Fear & Greed Index
+│   │   ├── twitter_scraper.py
+│   │   └── reddit_scraper.py
+│   ├── trading/              # Trading engine
+│   │   ├── engine.py         # Main trading engine
+│   │   ├── binance_client.py # Binance Futures client
+│   │   └── executor.py       # Order execution
+│   └── utils/                # Utility functions
+│
+├── config/
+│   ├── fenix.yaml            # Main configuration
+│   ├── llm_providers.yaml    # LLM provider profiles
+│   └── settings.py           # Environment settings
+│
+├── frontend/                 # React + Vite dashboard
+│   ├── components/           # React components
+│   ├── pages/                # Page components
+│   ├── hooks/                # Custom React hooks
+│   ├── stores/               # State management
+│   └── providers/            # Context providers
+│
+├── api/                      # Express.js API (optional)
+├── docs/                     # Documentation
+├── tests/                    # Test suite
+├── scripts/                  # Utility scripts
+└── logs/                     # Application logs
+```
+
+### Technology Stack
+
+| Layer | Technology | Details |
+|-------|------------|---------|
+| **Orchestration** | LangGraph, LangChain | State machine-based agent workflow |
+| **LLM Inference** | Ollama, MLX, Groq, HuggingFace | Multi-provider with automatic fallback |
+| **Backend** | Python 3.10+, FastAPI, Socket.IO | Async REST API + WebSocket |
+| **Frontend** | React 18, Vite, TypeScript, TailwindCSS | Modern SPA with real-time updates |
+| **Exchange** | Binance Futures (ccxt, python-binance) | Testnet & production support |
+| **Memory** | ReasoningBank | Semantic search + embeddings + LLM-as-Judge |
+| **Visual Tools** | mplfinance, Playwright | Chart generation + TradingView capture |
+| **Database** | SQLite | Trade history & reasoning persistence |
+| **Monitoring** | Custom dashboard | System metrics, agent performance |
+
+---
+
+## 📊 Configuration
+
+### Main Configuration (`config/fenix.yaml`)
+
+```yaml
+trading:
+  symbol: BTCUSDT
+  timeframe: 15m
+  max_risk_per_trade: 0.02
+  
+agents:
+  enable_technical: true
+  enable_qabba: true
+  enable_visual: true  # Requires vision model
+  enable_sentiment: true  # Requires news APIs
+  technical_weight: 0.30
+  qabba_weight: 0.30
+  consensus_threshold: 0.65
+```
+
+### LLM Provider Profile
+
+You can choose a provider profile in `config/llm_providers.yaml` or by setting the environment variable `LLM_PROFILE`. For example, to use the Groq Free profile:
+
+```bash
+export GROQ_API_KEY=gsk_...
+export LLM_PROFILE=groq_free
+export LLM_ALLOW_NOOP_STUB=1  # optional -- fallback to noop in dev
+```
+
+If Groq packages (`langchain_groq`) or local providers (e.g., `langchain_ollama`) are not installed, Fenix will try the configured fallback provider. If none are available and `LLM_ALLOW_NOOP_STUB` is `1`, the system will initialize a Noop stub so the graph can still run for local testing.
+
+### LLM Providers (`config/llm_providers.yaml`)
+
+```yaml
+active_profile: "all_local"  # Options: all_local, mixed_providers, mlx_optimized, all_cloud
+
+all_local:
+  technical:
+    provider_type: "ollama_local"
+    model_name: "qwen3:8b"
+    temperature: 0.1
+```
+
+### Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `BINANCE_API_KEY` | Binance API key | - |
+| `BINANCE_SECRET_KEY` | Binance secret key | - |
+| `LLM_PROFILE` | LLM provider profile to use | `all_local` |
+| `GROQ_API_KEY` | Groq API key (for cloud inference) | - |
+| `HF_TOKEN` | HuggingFace token | - |
+| `ALLOW_EXPOSE_API` | Allow API to bind to all interfaces | `false` |
+| `CREATE_DEMO_USERS` | Enable demo user creation | `false` |
+| `LLM_ALLOW_NOOP_STUB` | Fallback to noop LLM for testing | `0` |
+| `ENABLE_VISUAL_AGENT` | Enable chart analysis agent | `true` |
+| `ENABLE_SENTIMENT_AGENT` | Enable news/social analysis | `true` |
+
+---
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+pytest
+
+# Run specific test file
+pytest tests/test_agents.py -v
+
+# Run with coverage
+pytest --cov=src --cov-report=html
+
+# Run integration tests
+pytest tests/test_integration.py -v
+
+# Run LangGraph orchestrator tests
+pytest tests/test_langgraph_orchestrator.py -v
+```
+
+---
+
+## 📖 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [QUICKSTART.md](./docs/QUICKSTART.md) | Getting started guide |
+| [ARCHITECTURE.md](./docs/ARCHITECTURE.md) | System architecture |
+| [AGENTS.md](./docs/AGENTS.md) | Agent system documentation |
+| [API.md](./docs/API.md) | REST API reference |
+| [CHANGELOG.md](./docs/CHANGELOG.md) | Version history |
+| [DEVELOPMENT.md](./DEVELOPMENT.md) | Developer guide |
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | Contribution guidelines |
+
+
+---
+
+## 🛡️ Security Considerations
+
+### Trading Safety
+
+| Feature | Description |
+|---------|-------------|
+| **Paper Trading Default** | Always starts in paper mode - no real money at risk |
+| **Live Trading Safeguard** | Requires explicit `--allow-live` flag |
+| **Circuit Breakers** | Automatic trading halt on excessive losses |
+| **Position Limits** | Configurable maximum position sizes |
+| **Daily Loss Limits** | Stop trading when daily loss threshold reached |
+
+### Application Security
+
+| Feature | Description |
+|---------|-------------|
+| **API Key Encryption** | SecureSecretsManager for encrypted storage |
+| **Local API Binding** | API binds to `127.0.0.1` by default |
+| **Path Validation** | Prevents path traversal attacks |
+| **Rate Limiting** | Respects Binance API limits |
+| **Demo User Gating** | Demo accounts disabled by default |
+| **Secrets Scanning** | Pre-commit hooks for secret detection |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [contributing guidelines](./CONTRIBUTING.md) before submitting PRs.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+### Development Setup
+
+```bash
+# Install dev dependencies
+pip install -e ".[dev]"
+
+# Install pre-commit hooks
+pre-commit install
+
+# Run linting
+ruff check src/
+
+# Run type checking
+mypy src/
+```
+
+---
+
+## ⚠️ Disclaimer
+
+**This software is for educational and research purposes only.**
+
+- ⚠️ Cryptocurrency trading involves substantial risk of loss
+- 📉 Past performance is not indicative of future results
+- 💸 Never trade with money you cannot afford to lose
+- 🚫 The authors are not responsible for any financial losses
+- 🧪 Always test thoroughly on paper trading before considering live trading
+
+---
+
+## 📄 License
+
+This project is licensed under the **Apache License 2.0** - see the [LICENSE](LICENSE) file for details.
+
+```
+Copyright 2025 Ganador1
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+```
+
+---
+
+## 🙏 Acknowledgments
+
+### Technologies
+
+- [LangGraph](https://langchain-ai.github.io/langgraph/) - Agent orchestration framework
+- [Ollama](https://ollama.ai/) - Local LLM inference
+- [MLX](https://github.com/ml-explore/mlx) - Apple Silicon optimized ML framework
+- [Groq](https://groq.com/) - Ultra-fast LLM inference
+- [HuggingFace](https://huggingface.co/) - Model hub and inference
+- [Binance](https://www.binance.com/) - Exchange API
+- [Playwright](https://playwright.dev/) - Browser automation for TradingView capture
+- [FastAPI](https://fastapi.tiangolo.com/) - Modern Python web framework
+- [React](https://reactjs.org/) - Frontend framework
+- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS
+- [mplfinance](https://github.com/matplotlib/mplfinance) - Financial chart generation
+
+### 📚 Research Papers
+
+- **ReasoningBank**: ["ReasoningBank: Scaling Agent Self-Evolving with Reasoning Memory"](https://arxiv.org/abs/2509.25140) - Ouyang et al., 2025
+  - Core memory architecture enabling agents to learn from past decisions
+  - Implements semantic retrieval, LLM-as-Judge, and memory-aware test-time scaling
+
+---
+
+## 📬 Contact & Support
+
+- **Issues**: [GitHub Issues](https://github.com/Ganador1/FenixAI_tradingBot/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Ganador1/FenixAI_tradingBot/discussions)
 
 ---
 
 <div align="center">
-  <strong style="color:red;">⚠️ DISCLAIMER: Cryptocurrency trading is extremely risky. You can lose all your money. This project is for educational and experimental purposes only. Use at your own risk and never invest more than you can afford to lose.</strong>
+
+**Made with ❤️ by [Ganador1](https://github.com/Ganador1)**
+
+*If you find this project useful, please consider giving it a ⭐!*
+
+[⬆ Back to Top](#-fenixai-trading-bot-v20)
+
 </div>

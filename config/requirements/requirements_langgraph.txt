@@ -1,0 +1,49 @@
+# Dependencias para LangGraph Orchestrator
+# Instalación: pip install -r config/requirements/requirements_langgraph.txt
+
+# ============================================================================
+# LangGraph y LangChain Core
+# ============================================================================
+langgraph>=0.2.0
+langchain-core>=0.3.0
+langchain>=0.3.0
+
+# ============================================================================
+# Providers de LLM (instala solo los que uses)
+# ============================================================================
+
+# OpenAI (GPT-4, GPT-4o, etc.)
+langchain-openai>=0.2.0
+
+# Anthropic (Claude)
+langchain-anthropic>=0.2.0
+
+# Groq (fast inference)
+langchain-groq>=0.2.0
+
+# Ollama (local models)
+langchain-ollama>=0.2.0
+
+# HuggingFace (modelos open source)
+langchain-huggingface>=0.1.0
+
+# ============================================================================
+# Dependencias adicionales para gráficos
+# ============================================================================
+
+# Generación de gráficos de trading
+mplfinance>=0.12.10b0
+
+# TA-Lib para indicadores (requiere instalación de sistema)
+# macOS: brew install ta-lib
+# Linux: apt-get install libta-lib-dev
+ta-lib>=0.4.25
+
+# Trendlines y geometría
+numpy>=1.24.0
+scipy>=1.10.0
+
+# ============================================================================
+# Opcional: Para visualizar el grafo
+# ============================================================================
+pygraphviz>=1.11  # Requiere: brew install graphviz

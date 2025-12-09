@@ -1,0 +1,157 @@
+import React, { ReactNode } from 'react';
+import { cn } from '@/lib/utils';
+
+export interface CardProps {
+  children: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
+  hoverable?: boolean;
+}
+
+export interface CardHeaderProps {
+  children: React.ReactNode;
+  className?: string;
+  title?: string;
+  action?: ReactNode;
+}
+
+export interface CardTitleProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface CardContentProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface CardFooterProps {
+  children: React.ReactNode;
+  className?: string;
+  align?: 'left' | 'center' | 'right' | 'between';
+}
+
+export interface StatCardProps {
+  title: string;
+  value: string | number;
+  subtitle?: string;
+  icon?: ReactNode;
+  trend?: {
+    value: number;
+    isPositive: boolean;
+  };
+  className?: string;
+}
+
+export const Card: React.FC<CardProps> = ({
+  children,
+  className,
+  onClick,
+  hoverable = false,
+}) => {
+  return (
+    <div
+      className={cn(
+        'bg-white rounded-xl shadow-sm border border-gray-100 p-6',
+        hoverable && 'hover:shadow-lg hover:border-gray-200 transition-all cursor-pointer',
+        className
+      )}
+      onClick={onClick}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const CardHeader: React.FC<CardHeaderProps> = ({
+  children,
+  className,
+  title,
+  action,
+}) => {
+  return (
+    <div className={cn('mb-4 pb-4 border-b border-gray-200', className)}>
+      {title ? (
+        <div className="flex justify-between items-start">
+          <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+          {action && <div className="ml-4">{action}</div>}
+        </div>
+      ) : (
+        children
+      )}
+    </div>
+  );
+};
+
+export const CardTitle: React.FC<CardTitleProps> = ({ children, className }) => {
+  return (
+    <h3 className={cn('text-lg font-semibold text-gray-900', className)}>
+      {children}
+    </h3>
+  );
+};
+
+export const CardContent: React.FC<CardContentProps> = ({ children, className }) => {
+  return (
+    <div className={cn('', className)}>
+      {children}
+    </div>
+  );
+};
+
+export const CardFooter: React.FC<CardFooterProps> = ({
+  children,
+  className = '',
+  align = 'between',
+}) => {
+  const alignClass = {
+    left: 'justify-start',
+    center: 'justify-center',
+    right: 'justify-end',
+    between: 'justify-between',
+  };
+
+  return (
+    <div
+      className={cn(
+        'mt-4 pt-4 border-t border-gray-200 flex gap-3',
+        alignClass[align],
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const StatCard: React.FC<StatCardProps> = ({
+  title,
+  value,
+  subtitle,
+  icon,
+  trend,
+  className = '',
+}) => {
+  return (
+    <Card className={cn('', className)}>
+      <div className="flex items-start justify-between">
+        <div>
+          <p className="text-sm font-medium text-gray-600">{title}</p>
+          <p className="text-2xl font-bold text-gray-900 mt-2">{value}</p>
+          {subtitle && <p className="text-xs text-gray-500 mt-1">{subtitle}</p>}
+          {trend && (
+            <p
+              className={cn(
+                'text-sm font-medium mt-2',
+                trend.isPositive ? 'text-green-600' : 'text-red-600'
+              )}
+            >
+              {trend.isPositive ? '↑' : '↓'} {Math.abs(trend.value)}%
+            </p>
+          )}
+        </div>
+        {icon && <div className="text-gray-400">{icon}</div>}
+      </div>
+    </Card>
+  );
+};
