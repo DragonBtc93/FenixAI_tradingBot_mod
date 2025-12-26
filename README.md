@@ -277,7 +277,7 @@ ollama pull qwen3:8b
 python run_fenix.py --api
 
 # Terminal 2: Start the frontend
-cd frontend && npm install && npm run client:dev
+cd frontend && npm install && npm run dev
 ```
 
 Access the dashboard at: **http://localhost:5173**
@@ -316,7 +316,6 @@ python run_fenix.py --mode live --allow-live  # Live trading (⚠️ real money)
 FenixAI/
 ├── run_fenix.py              # Main entry point
 ├── pyproject.toml            # Python project configuration
-├── package.json              # Node.js dependencies (API)
 │
 ├── src/
 │   ├── analysis/             # Technical analysis modules
@@ -361,9 +360,9 @@ FenixAI/
 │   ├── pages/                # Page components
 │   ├── hooks/                # Custom React hooks
 │   ├── stores/               # State management
-│   └── providers/            # Context providers
+│   ├── providers/            # Context providers
+│   └── api/                  # Express.js API
 │
-├── api/                      # Express.js API (optional)
 ├── docs/                     # Documentation
 ├── tests/                    # Test suite
 ├── scripts/                  # Utility scripts
