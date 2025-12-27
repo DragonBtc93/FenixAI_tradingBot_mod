@@ -262,6 +262,16 @@ source .venv/bin/activate  # For Linux/Mac, including Debian-based systems like 
 # Install dependencies
 pip install -e ".[dev,vision,monitoring]"
 
+# Note for TA-Lib installation on Debian-based systems (like Pop!_OS)
+# You may need to install the TA-Lib C library first:
+# sudo apt-get install -y ta-lib-dev
+
+# Default Login Credentials for Local Development
+# The application will create two demo users by default in development.
+# - Admin: admin@trading.com
+# - Trader: trader@trading.com
+# The default password for both is "password". You can change this by setting the DEFAULT_DEMO_PASSWORD environment variable.
+
 # Configure environment
 cp .env.example .env
 # Edit .env with your API keys
@@ -277,7 +287,7 @@ ollama pull qwen3:8b
 python run_fenix.py --api
 
 # Terminal 2: Start the frontend
-cd frontend && npm install && npm run dev
+cd frontend && npm install && npm run client:dev
 ```
 
 Access the dashboard at: **http://localhost:5173**
@@ -361,7 +371,7 @@ FenixAI/
 │   ├── hooks/                # Custom React hooks
 │   ├── stores/               # State management
 │   ├── providers/            # Context providers
-│   └── api/                  # Express.js API
+│   └── api/                  # API client for frontend
 │
 ├── docs/                     # Documentation
 ├── tests/                    # Test suite
