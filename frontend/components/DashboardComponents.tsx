@@ -3,7 +3,7 @@ import { Card, CardHeader, CardContent, StatCard } from '@/components/ui/Card';
 import { TrendingUp, TrendingDown, Activity, Zap, Shield, AlertCircle } from 'lucide-react';
 
 /**
- * Dashboard Principal - Vista resumen
+ * Main Dashboard - Overview
  */
 export function DashboardOverview() {
   const stats = [
@@ -54,7 +54,7 @@ export function DashboardOverview() {
 }
 
 /**
- * Alertas y Notificaciones
+ * Alerts and Notifications
  */
 export function AlertsPanel() {
   const alerts = [
