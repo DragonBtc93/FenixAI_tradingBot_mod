@@ -44,7 +44,7 @@ GET /api/v1/status
 ```json
 {
   "mode": "paper",
-  "symbol": "BTCUSDT",
+  "symbol": "BTCUSD",
   "timeframe": "15m",
   "is_running": true,
   "last_analysis": "2024-12-05T10:29:30Z",
@@ -65,7 +65,7 @@ POST /api/v1/trading/start
 
 ```json
 {
-  "symbol": "BTCUSDT",
+  "symbol": "BTCUSD",
   "timeframe": "15m",
   "mode": "paper"
 }
@@ -76,7 +76,7 @@ POST /api/v1/trading/start
 ```json
 {
   "status": "started",
-  "message": "Trading engine started for BTCUSDT"
+  "message": "Trading engine started for BTCUSD"
 }
 ```
 
@@ -110,7 +110,7 @@ GET /api/v1/analysis/current
 ```json
 {
   "timestamp": "2024-12-05T10:30:00Z",
-  "symbol": "BTCUSDT",
+  "symbol": "BTCUSD",
   "current_price": 42150.50,
   "agents": {
     "technical": {
@@ -162,7 +162,7 @@ GET /api/v1/trades
   "trades": [
     {
       "id": "trade_123456",
-      "symbol": "BTCUSDT",
+      "symbol": "BTCUSD",
       "side": "BUY",
       "entry_price": 42000.0,
       "exit_price": 42500.0,
@@ -227,7 +227,7 @@ GET /api/v1/portfolio
   "total_pnl_percent": 1.505,
   "open_positions": [
     {
-      "symbol": "BTCUSDT",
+      "symbol": "BTCUSD",
       "side": "LONG",
       "entry_price": 42000.0,
       "current_price": 42150.0,
@@ -297,7 +297,7 @@ Real-time market data updates.
 {
   "event": "market_data",
   "data": {
-    "symbol": "BTCUSDT",
+    "symbol": "BTCUSD",
     "price": 42150.50,
     "volume_24h": 1234567890,
     "change_24h": 2.5,
@@ -330,7 +330,7 @@ Trade was executed.
   "event": "trade_executed",
   "data": {
     "trade_id": "trade_123456",
-    "symbol": "BTCUSDT",
+    "symbol": "BTCUSD",
     "side": "BUY",
     "price": 42000.0,
     "quantity": 0.01
@@ -346,7 +346,7 @@ Position status changed.
 {
   "event": "position_update",
   "data": {
-    "symbol": "BTCUSDT",
+    "symbol": "BTCUSD",
     "unrealized_pnl": 15.50,
     "current_price": 42155.0
   }

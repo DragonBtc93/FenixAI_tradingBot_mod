@@ -362,7 +362,7 @@ if __name__ == "__main__":
     async def fetch_price_async():
         """Fetch con protección completa."""
         async with httpx.AsyncClient() as client:
-            response = await client.get("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT")
+            response = await client.get("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSD")
             return response.json()
     
     # Test

@@ -15,13 +15,13 @@ class TestReasoningEntry:
         entry = ReasoningEntry(
             agent="technical",
             prompt_digest="abc123",
-            prompt="Analyze BTCUSDT",
+            prompt="Analyze BTCUSD",
             reasoning="RSI shows oversold conditions",
             action="BUY",
             confidence=0.75,
             backend="ollama",
             latency_ms=150.5,
-            metadata={"symbol": "BTCUSDT"},
+            metadata={"symbol": "BTCUSD"},
             created_at=datetime.now().isoformat(),
         )
 
@@ -36,7 +36,7 @@ class TestReasoningEntry:
         entry = ReasoningEntry(
             agent="technical",
             prompt_digest="abc123",
-            prompt="Analyze BTCUSDT market",
+            prompt="Analyze BTCUSD market",
             reasoning="RSI shows oversold conditions at support",
             action="BUY",
             confidence=0.75,
@@ -48,8 +48,8 @@ class TestReasoningEntry:
 
         assert entry.matches("oversold")
         assert entry.matches("RSI")
-        assert entry.matches("BTCUSDT")
-        assert not entry.matches("ETHUSDT")
+        assert entry.matches("BTCUSD")
+        assert not entry.matches("ETHUSD")
 
     def test_keyword_overlap_similarity(self):
         """Verificar cálculo de similitud por overlap."""
@@ -58,7 +58,7 @@ class TestReasoningEntry:
         entry = ReasoningEntry(
             agent="technical",
             prompt_digest="abc123",
-            prompt="Analyze BTCUSDT RSI MACD",
+            prompt="Analyze BTCUSD RSI MACD",
             reasoning="Technical analysis",
             action="BUY",
             confidence=0.75,
@@ -69,7 +69,7 @@ class TestReasoningEntry:
         )
 
         # Mismo prompt debería tener alta similitud
-        similarity = entry._keyword_overlap("Analyze BTCUSDT RSI MACD")
+        similarity = entry._keyword_overlap("Analyze BTCUSD RSI MACD")
         assert similarity == 1.0
 
         # Prompt diferente debería tener menor similitud
@@ -95,7 +95,7 @@ class TestReasoningBank:
         """Verificar almacenamiento de entrada."""
         entry = reasoning_bank.store_entry(
             agent_name="technical",
-            prompt="Analyze BTCUSDT",
+            prompt="Analyze BTCUSD",
             normalized_result={"action": "BUY", "confidence": 0.75},
             raw_response="BUY signal detected",
             backend="ollama",
@@ -146,7 +146,7 @@ class TestReasoningBank:
         """Verificar búsqueda de entradas similares."""
         reasoning_bank.store_entry(
             agent_name="technical",
-            prompt="BTCUSDT RSI oversold analysis",
+            prompt="BTCUSD RSI oversold analysis",
             normalized_result={"action": "BUY"},
             raw_response="",
             backend="ollama",

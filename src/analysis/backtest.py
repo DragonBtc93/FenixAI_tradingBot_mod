@@ -160,12 +160,12 @@ class FenixMultiAgentStrategy(Strategy):
 if __name__ == "__main__":
     logger.info("Iniciando Backtesting para Fénix Bot...")
     try:
-        data_df = pd.read_csv("data/BTCUSDT_1m_recent.csv", index_col="Timestamp", parse_dates=True)
+        data_df = pd.read_csv("data/BTCUSD_1m_recent.csv", index_col="Timestamp", parse_dates=True)
         data_df.columns = [col.capitalize() for col in data_df.columns]
-        logger.info(f"Cargados datos de data/BTCUSDT_1m_recent.csv: {len(data_df)} filas")
+        logger.info(f"Cargados datos de data/BTCUSD_1m_recent.csv: {len(data_df)} filas")
         if data_df.empty: raise FileNotFoundError
     except FileNotFoundError:
-        logger.warning("Archivo data/BTCUSDT_1m_recent.csv no encontrado. Usando datos de ejemplo.")
+        logger.warning("Archivo data/BTCUSD_1m_recent.csv no encontrado. Usando datos de ejemplo.")
         n_rows = 2000; base_time = pd.Timestamp('2024-01-01 00:00:00', tz='UTC')
         idx = pd.to_datetime([base_time + pd.Timedelta(minutes=i) for i in range(n_rows)])
         open_prices = np.full(n_rows, 100.0)

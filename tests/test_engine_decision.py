@@ -40,7 +40,7 @@ class _StubMarketData:
 
 @pytest.mark.asyncio
 async def test_process_decision_increments_hold_counter():
-    engine = TradingEngine(symbol="BTCUSDT", timeframe="15m", paper_trading=True)
+    engine = TradingEngine(symbol="BTCUSD", timeframe="15m", paper_trading=True)
     engine.executor = _StubExecutor()
     engine.market_data = _StubMarketData()
 
@@ -51,7 +51,7 @@ async def test_process_decision_increments_hold_counter():
 
 @pytest.mark.asyncio
 async def test_process_decision_executes_paper_trade_without_live_flag():
-    engine = TradingEngine(symbol="BTCUSDT", timeframe="15m", paper_trading=True)
+    engine = TradingEngine(symbol="BTCUSD", timeframe="15m", paper_trading=True)
     engine.executor = _StubExecutor()
     engine.market_data = _StubMarketData(price=20000)
 

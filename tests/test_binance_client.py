@@ -53,7 +53,7 @@ class TestBinanceClient:
             testnet=True
         )
         
-        params = {"symbol": "BTCUSDT"}
+        params = {"symbol": "BTCUSD"}
         signed = client._sign_request(params)
         
         assert "timestamp" in signed
@@ -68,13 +68,13 @@ class TestOrderValidation:
     def test_order_params(self):
         """Verifica parámetros de orden."""
         params = {
-            "symbol": "BTCUSDT",
+            "symbol": "BTCUSD",
             "side": "BUY",
             "type": "MARKET",
             "quantity": "0.001000",
         }
         
-        assert params["symbol"] == "BTCUSDT"
+        assert params["symbol"] == "BTCUSD"
         assert params["side"] in ["BUY", "SELL"]
         assert params["type"] in ["MARKET", "LIMIT"]
         assert float(params["quantity"]) > 0

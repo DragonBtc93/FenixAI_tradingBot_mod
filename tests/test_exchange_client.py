@@ -22,7 +22,7 @@ async def test_get_price():
     """
     client = ExchangeClient(exchange_id='binance', testnet=True)
     await client.connect()
-    price = await client.get_price('BTC/USDT')
+    price = await client.get_price('BTC/USD')
     assert isinstance(price, float)
     assert price > 0
     await client.close()

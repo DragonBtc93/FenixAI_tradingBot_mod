@@ -49,9 +49,9 @@ class TradingConfig:
     """Trading configuration"""
     exchange_id: str = "binance"
     mode: str = "paper"  # "paper" or "live"
-    symbol: str = "BTC/USDT"
+    symbol: str = "BTC/USD"
     base_asset: str = "BTC"
-    quote_asset: str = "USDT"
+    quote_asset: str = "USD"
     timeframe: str = "5m"
     use_testnet: bool = False
     min_candles_for_bot_start: int = 51

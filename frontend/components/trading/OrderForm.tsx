@@ -20,7 +20,7 @@ interface OrderFormProps {
   defaultSymbol?: string;
 }
 
-export function OrderForm({ onSubmit, isLoading = false, defaultSymbol = 'BTCUSDT' }: OrderFormProps) {
+export function OrderForm({ onSubmit, isLoading = false, defaultSymbol = 'BTCUSD' }: OrderFormProps) {
   const [form, setForm] = useState<OrderFormData>({
     symbol: defaultSymbol,
     type: 'market',
@@ -97,7 +97,7 @@ export function OrderForm({ onSubmit, isLoading = false, defaultSymbol = 'BTCUSD
             <Input
               value={form.symbol}
               onChange={(e) => updateForm('symbol', e.target.value.toUpperCase())}
-              placeholder="BTCUSDT"
+              placeholder="BTCUSD"
             />
           </div>
 

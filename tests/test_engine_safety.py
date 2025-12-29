@@ -32,7 +32,7 @@ class _DummyMarketData:
 @pytest.mark.asyncio
 async def test_live_trade_blocked_without_flag():
     engine = TradingEngine(
-        symbol="BTCUSDT",
+        symbol="BTCUSD",
         timeframe="15m",
         use_testnet=False,
         paper_trading=False,
@@ -53,7 +53,7 @@ async def test_live_trade_blocked_without_flag():
 @pytest.mark.asyncio
 async def test_live_trade_allows_execution_with_flag():
     engine = TradingEngine(
-        symbol="BTCUSDT",
+        symbol="BTCUSD",
         timeframe="15m",
         use_testnet=False,
         paper_trading=False,

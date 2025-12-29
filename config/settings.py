@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class TradingSettings:
     """Configuración de trading."""
-    symbol: str = "BTCUSDT"
+    symbol: str = "BTCUSD"
     timeframe: str = "15m"
     min_klines_to_start: int = 20
     analysis_interval_seconds: int = 60
@@ -270,7 +270,7 @@ DEFAULT_CONFIG_YAML = """
 # ================================
 
 trading:
-  symbol: BTCUSDT
+  symbol: BTCUSD
   timeframe: 15m
   min_klines_to_start: 20
   analysis_interval_seconds: 60

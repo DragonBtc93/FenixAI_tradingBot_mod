@@ -62,7 +62,7 @@ export const Trading: React.FC = () => {
   
   // Order form state
   const [orderForm, setOrderForm] = useState({
-    symbol: 'BTCUSDT',
+    symbol: 'BTCUSD',
     type: 'market' as 'market' | 'limit' | 'stop',
     side: 'buy' as 'buy' | 'sell',
     quantity: 0.1,
@@ -99,7 +99,7 @@ export const Trading: React.FC = () => {
         fetch('/api/trading/orders'),
         fetch('/api/trading/positions'),
         fetch('/api/trading/history'),
-        fetch('/api/market/data/BTCUSDT')
+        fetch('/api/market/data/BTCUSD')
       ]);
 
       if (!ordersRes.ok || !positionsRes.ok || !historyRes.ok || !marketRes.ok) {
@@ -211,7 +211,7 @@ export const Trading: React.FC = () => {
       
       // Reset form
       setOrderForm({
-        symbol: 'BTCUSDT',
+        symbol: 'BTCUSD',
         type: 'market',
         side: 'buy',
         quantity: 0.1,
@@ -353,7 +353,7 @@ export const Trading: React.FC = () => {
                 <Input
                   value={orderForm.symbol}
                   onChange={(e) => setOrderForm(prev => ({ ...prev, symbol: e.target.value }))}
-                  placeholder="BTCUSDT"
+                  placeholder="BTCUSD"
                 />
               </div>
 

@@ -28,7 +28,7 @@ class TestLangGraphIntegration:
     def market_data_sample(self):
         """Datos de mercado de ejemplo."""
         return {
-            "symbol": "BTCUSDT",
+            "symbol": "BTCUSD",
             "timestamp": datetime.now().isoformat(),
             "price": 95000.0,
             "volume_24h": 1500000000,
@@ -199,13 +199,13 @@ class TestTradingEngineIntegration:
         from src.trading.engine import TradingConfig
         
         config = TradingConfig(
-            symbol="BTCUSDT",
+            symbol="BTCUSD",
             interval="15m",
             max_risk_per_trade=2.0,
             testnet=True
         )
         
-        assert config.symbol == "BTCUSDT"
+        assert config.symbol == "BTCUSD"
         assert config.interval == "15m"
         assert config.max_risk_per_trade == 2.0
         assert config.testnet is True

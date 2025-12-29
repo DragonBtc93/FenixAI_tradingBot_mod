@@ -31,15 +31,15 @@ async def test_execution_flow():
     try:
         # 2. Check Balance
         print("\n--- 2. Checking Balance ---")
-        balance = await client.get_balance("USDT")
-        logger.info(f"💰 USDT Balance: ${balance:,.2f}")
+        balance = await client.get_balance("USD")
+        logger.info(f"💰 USD Balance: ${balance:,.2f}")
         
         if balance < 10:
             logger.warning("⚠️ Low balance for testing")
 
         # 3. Get Price
         print("\n--- 3. Getting BTC Price ---")
-        price = await client.get_price("BTCUSDT")
+        price = await client.get_price("BTCUSD")
         logger.info(f"BTC Price: ${price:,.2f}")
 
         # 4. Place limit order (far from price to avoid fill) or Market
@@ -56,7 +56,7 @@ async def test_execution_flow():
         print(f"   Target TP: {take_profit:.2f}")
         
         order = await client.place_order(
-            symbol="BTCUSDT",
+            symbol="BTCUSD",
             side="BUY",
             quantity=quantity,
             order_type="MARKET",
@@ -69,7 +69,7 @@ async def test_execution_flow():
             
             # 5. Check Open Orders (SL/TP)
             await asyncio.sleep(2) # Wait for propagation
-            open_orders = await client._request("GET", "/fapi/v1/openOrders", {"symbol": "BTCUSDT"}, signed=True)
+            open_orders = await client._request("GET", "/fapi/v1/openOrders", {"symbol": "BTCUSD"}, signed=True)
             print(f"\n--- 5. Verifying SL/TP Orders ({len(open_orders)} open) ---")
             for o in open_orders:
                 logger.info(f"   [Order {o['orderId']}] {o['type']} {o['side']} @ {o.get('stopPrice', o.get('price'))}")
@@ -81,17 +81,17 @@ async def test_execution_flow():
 
             # 6. Cleanup (Cancel All)
             print("\n--- 6. Cleaning Up (Cancel All) ---")
-            cancelled = await client.cancel_all_orders("BTCUSDT")
+            cancelled = await client.cancel_all_orders("BTCUSD")
             logger.info("✅ All orders cancelled")
             
             # Close position if filled
-            positions = await client.get_positions("BTCUSDT")
+            positions = await client.get_positions("BTCUSD")
             for p in positions:
                 amt = float(p['positionAmt'])
                 if amt != 0:
                     logger.info(f"Closing remaining position: {amt}")
                     await client.place_order(
-                        symbol="BTCUSDT",
+                        symbol="BTCUSD",
                         side="SELL" if amt > 0 else "BUY",
                         quantity=abs(amt),
                         order_type="MARKET"

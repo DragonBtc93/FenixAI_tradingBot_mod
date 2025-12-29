@@ -10,7 +10,7 @@ logger = logging.getLogger("VisualTest")
 
 def test_visual_interaction():
     # Load image
-    img_path = "cache/charts/BTCUSDT_15m_20251205_183709.png"
+    img_path = "cache/charts/BTCUSD_15m_20251205_183709.png"
     if not os.path.exists(img_path):
         # Fallback to any png
         files = [f for f in os.listdir("cache/charts") if f.endswith(".png")]

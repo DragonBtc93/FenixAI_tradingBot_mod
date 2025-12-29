@@ -1,4 +1,4 @@
-# Preset estable para paper/live con BTCUSDT en 15m
+# Preset estable para paper/live con BTCUSD en 15m
 
 binance:
   api_key: ""
@@ -40,8 +40,8 @@ trading:
     - 15m
     - 1h
   base_asset: BTC
-  quote_asset: USDT
-  symbol: BTCUSDT
+  quote_asset: USD
+  symbol: BTCUSD
   mode: paper
   min_candles_for_bot_start: 150
   order_status_initial_delay: 0.5
@@ -49,8 +49,8 @@ trading:
   trade_cooldown_after_close_seconds: 120
   sentiment_refresh_cooldown_seconds: 3600
   tradingview_chart_urls:
-    15m: "https://es.tradingview.com/chart/?symbol=BINANCE%3ABTCUSDT&interval=15"
-    1h: "https://es.tradingview.com/chart/?symbol=BINANCE%3ABTCUSDT&interval=60"
+    15m: "https://es.tradingview.com/chart/?symbol=BINANCE%3ABTCUSD&interval=15"
+    1h: "https://es.tradingview.com/chart/?symbol=BINANCE%3ABTCUSD&interval=60"
   use_testnet: false
 
 agents:

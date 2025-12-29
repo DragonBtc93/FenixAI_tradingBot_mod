@@ -14,7 +14,7 @@ logging:
   level: DEBUG
   log_file: logs/fenix_live_trading.log
 
-# GESTIÓN DE RIESGO OPTIMIZADA PARA 5M ADAUSDT
+# GESTIÓN DE RIESGO OPTIMIZADA PARA 5M ADAUSD
 risk_management:
   profile: aggressive
   # Gestión de riesgo ajustada para 5m con ADA - OPTIMIZADO PARA ALTCOIN
@@ -155,8 +155,8 @@ trading:
   
   # Configuración de símbolo
   base_asset: ADA                   # Cambiado a ADA - Cardano
-  quote_asset: USDT
-  symbol: ADAUSDT                   # Cambiado a ADAUSDT - Patrones técnicos claros
+  quote_asset: USD
+  symbol: ADAUSD                   # Cambiado a ADAUSD - Patrones técnicos claros
   
   # Parámetros operativos
   mode: live
@@ -181,8 +181,8 @@ trading:
   
   # URLs de TradingView actualizadas
   tradingview_chart_urls:
-    5m: "https://es.tradingview.com/chart/iERzAcI8/?symbol=BINANCE%3AADAUSDT&interval=5"
-    15m: "https://es.tradingview.com/chart/iERzAcI8/?symbol=BINANCE%3AADAUSDT&interval=15"
+    5m: "https://es.tradingview.com/chart/iERzAcI8/?symbol=BINANCE%3AADAUSD&interval=5"
+    15m: "https://es.tradingview.com/chart/iERzAcI8/?symbol=BINANCE%3AADAUSD&interval=15"
   
   use_testnet: false
 

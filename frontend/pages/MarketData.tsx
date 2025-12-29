@@ -54,7 +54,7 @@ export const MarketData: React.FC = () => {
     }
   };
 
-  const fetchHistorical = async (symbol = 'BTCUSDT') => {
+  const fetchHistorical = async (symbol = 'BTCUSD') => {
     try {
       const interval = '15m';
       const resp = await fetch(`/api/market/data/${symbol}?interval=${interval}&limit=24`);
@@ -96,7 +96,7 @@ export const MarketData: React.FC = () => {
 
   useEffect(() => {
     fetchLiveMarket();
-    fetchHistorical('BTCUSDT');
+    fetchHistorical('BTCUSD');
     fetchSentiment();
   }, []);
 

@@ -414,7 +414,7 @@ FenixAI/
 ```yaml
 trading:
   exchange: binance
-  symbol: BTC/USDT
+  symbol: BTC/USD
   timeframe: 15m
   max_risk_per_trade: 0.02
   

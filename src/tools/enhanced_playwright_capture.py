@@ -251,7 +251,7 @@ class EnhancedPlaywrightCapture:
         logger.info("🔒 Browser closed")
     
     async def capture_chart(self, 
-                          symbol: str = "SOLUSDT", 
+                          symbol: str = "SOLUSD",
                           timeframe: str = "1",
                           max_retries: int = 3,
                           required_indicators: Optional[List[str]] = None) -> Optional[str]:
@@ -259,7 +259,7 @@ class EnhancedPlaywrightCapture:
         Capture chart with retry logic
         
         Args:
-            symbol: Trading symbol (e.g., "SOLUSDT")
+            symbol: Trading symbol (e.g., "SOLUSD")
             timeframe: Chart timeframe (e.g., "1", "5", "15", "1H")
             max_retries: Maximum number of retry attempts
             
@@ -551,7 +551,7 @@ class EnhancedPlaywrightCapture:
 
 # Convenience functions
 
-async def capture_chart_async(symbol: str = "SOLUSDT", 
+async def capture_chart_async(symbol: str = "SOLUSD",
                              timeframe: str = "1",
                              browser_type: str = "chromium",
                              required_indicators: Optional[List[str]] = None) -> Optional[str]:
@@ -570,7 +570,7 @@ async def capture_chart_async(symbol: str = "SOLUSDT",
         return await capture.capture_chart(symbol, timeframe, required_indicators=required_indicators)
 
 
-def capture_chart_sync(symbol: str = "SOLUSDT", 
+def capture_chart_sync(symbol: str = "SOLUSD",
                        timeframe: str = "1",
                        browser_type: str = "chromium",
                        required_indicators: Optional[List[str]] = None) -> Optional[str]:
@@ -602,7 +602,7 @@ if __name__ == "__main__":
         async with EnhancedPlaywrightCapture(headless=True, enable_cache=True) as capture:
             # Test single capture
             print("\n1️⃣ Testing single capture...")
-            result1 = await capture.capture_chart("SOLUSDT", "1")
+            result1 = await capture.capture_chart("SOLUSD", "1")
             
             if result1:
                 print(f"✅ Capture successful! Size: {len(result1)} chars")
@@ -618,14 +618,14 @@ if __name__ == "__main__":
             
             # Test cache (should hit cache)
             print("\n2️⃣ Testing cache...")
-            result2 = await capture.capture_chart("SOLUSDT", "1")
+            result2 = await capture.capture_chart("SOLUSD", "1")
             
             if result2:
                 print("✅ Cache test successful!")
             
             # Test multiple timeframes
             print("\n3️⃣ Testing multiple timeframes...")
-            results = await capture.capture_multiple_timeframes("BTCUSDT", ["1", "5", "15"])
+            results = await capture.capture_multiple_timeframes("BTCUSD", ["1", "5", "15"])
             
             successful = sum(1 for r in results.values() if r)
             print(f"✅ Captured {successful}/{len(results)} timeframes")

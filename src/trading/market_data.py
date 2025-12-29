@@ -82,7 +82,7 @@ class MarketDataManager:
     def __init__(
         self,
         exchange_id: str = "binance",
-        symbol: str = "BTC/USDT",
+        symbol: str = "BTC/USD",
         timeframe: str = "15m",
         use_testnet: bool = False,
     ):
@@ -288,7 +288,7 @@ _market_data_instance: MarketDataManager | None = None
 
 def get_market_data_manager(
     exchange_id: str = "binance",
-    symbol: str = "BTC/USDT",
+    symbol: str = "BTC/USD",
     timeframe: str = "15m",
     use_testnet: bool = False,
     force_new: bool = False,
