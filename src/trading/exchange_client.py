@@ -89,6 +89,11 @@ class ExchangeClient:
         """
         if not self._exchange:
             return None
+
+        # Kraken uses XBT for Bitcoin instead of BTC
+        if self.exchange_id == 'kraken' and 'BTC' in symbol:
+            symbol = symbol.replace('BTC', 'XBT')
+
         try:
             return await self._exchange.fetch_ticker(symbol)
         except Exception as e:
@@ -114,6 +119,11 @@ class ExchangeClient:
         if not self._exchange or not self._exchange.has['fetchOHLCV']:
             logger.warning(f"Exchange '{self.exchange_id}' does not support fetching OHLCV data.")
             return []
+
+        # Kraken uses XBT for Bitcoin instead of BTC
+        if self.exchange_id == 'kraken' and 'BTC' in symbol:
+            symbol = symbol.replace('BTC', 'XBT')
+
         try:
             klines = await self._exchange.fetch_ohlcv(symbol, timeframe=interval, limit=limit)
             # Convert to the same format as BinanceClient
