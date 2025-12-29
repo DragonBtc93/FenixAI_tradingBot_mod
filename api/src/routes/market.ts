@@ -6,8 +6,8 @@ const router = Router();
 const instruments = [
   {
     id: '1',
-    symbol: 'BTCUSDT',
-    name: 'Bitcoin/USDT',
+    symbol: 'BTCUSD',
+    name: 'Bitcoin/USD',
     category: 'crypto',
     exchange: 'Binance',
     tick_size: 0.01,
@@ -16,8 +16,8 @@ const instruments = [
   },
   {
     id: '2',
-    symbol: 'ETHUSDT',
-    name: 'Ethereum/USDT',
+    symbol: 'ETHUSD',
+    name: 'Ethereum/USD',
     category: 'crypto',
     exchange: 'Binance',
     tick_size: 0.01,
@@ -26,8 +26,8 @@ const instruments = [
   },
   {
     id: '3',
-    symbol: 'ADAUSDT',
-    name: 'Cardano/USDT',
+    symbol: 'ADAUSD',
+    name: 'Cardano/USD',
     category: 'crypto',
     exchange: 'Binance',
     tick_size: 0.0001,
@@ -36,8 +36,8 @@ const instruments = [
   },
   {
     id: '4',
-    symbol: 'DOTUSDT',
-    name: 'Polkadot/USDT',
+    symbol: 'DOTUSD',
+    name: 'Polkadot/USD',
     category: 'crypto',
     exchange: 'Binance',
     tick_size: 0.001,
@@ -46,8 +46,8 @@ const instruments = [
   },
   {
     id: '5',
-    symbol: 'LINKUSDT',
-    name: 'Chainlink/USDT',
+    symbol: 'LINKUSD',
+    name: 'Chainlink/USD',
     category: 'crypto',
     exchange: 'Binance',
     tick_size: 0.001,

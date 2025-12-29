@@ -186,3 +186,17 @@ async def login_swagger(form_data: OAuth2PasswordRequestForm = Depends(), db: As
         data={"sub": user.email}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
+
+
+@router.get("/users", response_model=list[UserResponse])
+async def get_users(db: AsyncSession = Depends(get_db)):
+    """Get all users."""
+    result = await db.execute(select(User))
+    users = result.scalars().all()
+    return users
+
+
+@router.get("/roles", response_model=list[str])
+async def get_roles():
+    """Get all available roles."""
+    return ["admin", "trader", "viewer"]

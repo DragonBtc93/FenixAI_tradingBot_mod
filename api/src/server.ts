@@ -166,7 +166,7 @@ async function initializeServices() {
 function setupRealTimeUpdates() {
   // Market data updates (simulated for demo)
   setInterval(() => {
-    const symbols = ['BTCUSDT', 'ETHUSDT', 'ADAUSDT', 'DOTUSDT', 'LINKUSDT'];
+    const symbols = ['BTCUSD', 'ETHUSD', 'ADAUSD', 'DOTUSD', 'LINKUSD'];
     const updates = symbols.map(symbol => ({
       symbol,
       bid: Math.random() * 1000 + 1000,

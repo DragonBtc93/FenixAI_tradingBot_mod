@@ -2,7 +2,7 @@
 # ================================
 
 trading:
-  symbol: BTCUSDT
+  symbol: BTCUSD
   timeframe: 15m
   min_klines_to_start: 20
   analysis_interval_seconds: 60

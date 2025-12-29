@@ -431,7 +431,7 @@ PROPUESTA:
 - Confianza: {confidence}
 
 ESTADO DEL PORTAFOLIO:
-- Balance USDT: {balance}
+- Balance USD: {balance}
 - Posiciones abiertas: {open_positions}
 - PnL del día: {daily_pnl}
 - Drawdown actual: {current_drawdown}
@@ -535,7 +535,7 @@ def format_prompt(
     
     # Establecer valores por defecto para parámetros faltantes
     defaults = {
-        "symbol": "BTCUSDT",
+        "symbol": "BTCUSD",
         "timeframe": "15m",
         "indicators_json": "{}",
         "htf_context": "No disponible",
@@ -616,7 +616,7 @@ if __name__ == "__main__":
     # Ejemplo: Formatear prompt para agente técnico
     messages = format_prompt(
         "technical_analyst",
-        symbol="BTCUSDT",
+        symbol="BTCUSD",
         timeframe="15m",
         indicators_json=json.dumps({
             "rsi": 45.5,

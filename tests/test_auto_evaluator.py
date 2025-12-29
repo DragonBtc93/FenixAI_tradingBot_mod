@@ -37,7 +37,7 @@ async def test_auto_evaluator_buy_success(tmp_path, monkeypatch):
             {'open': '100.0', 'close': '101.0', 'timestamp': start_time or 0},
         ]
 
-    evaluator = AutoEvaluator(symbol='BTCUSDT', evaluation_horizon_minutes=0)
+    evaluator = AutoEvaluator(symbol='BTCUSD', evaluation_horizon_minutes=0)
     # Patch its client method
     monkeypatch.setattr(evaluator.client, 'get_klines', fake_get_klines)
 
@@ -77,7 +77,7 @@ async def test_auto_evaluator_sell_success(tmp_path, monkeypatch):
             {'open': '101.0', 'close': '100.0', 'timestamp': start_time or 0},
         ]
 
-    evaluator = AutoEvaluator(symbol='BTCUSDT', evaluation_horizon_minutes=0)
+    evaluator = AutoEvaluator(symbol='BTCUSD', evaluation_horizon_minutes=0)
     monkeypatch.setattr(evaluator.client, 'get_klines', fake_get_klines)
 
     await evaluator.evaluate_pending_entries()

@@ -173,14 +173,14 @@ def get_global_stream_metrics():
     except ImportError:
         # Retornar datos simulados si no está disponible
         return {
-            "BTCUSDT": {
+            "BTCUSD": {
                 "total_messages": 1250,
                 "successful_connections": 15,
                 "reconnects": 2,
                 "errors": 1,
                 "avg_message_interval_ms": 850.5
             },
-            "ETHUSDT": {
+            "ETHUSD": {
                 "total_messages": 980,
                 "successful_connections": 12,
                 "reconnects": 1,

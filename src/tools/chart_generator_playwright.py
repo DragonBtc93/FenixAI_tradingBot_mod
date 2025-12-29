@@ -35,7 +35,7 @@ async def generate_chart_for_visual_agent_playwright_async(
     Usar esta versión cuando ya estés en un contexto async.
     
     Args:
-        symbol: Trading symbol (e.g., 'BTCUSDT')
+        symbol: Trading symbol (e.g., 'BTCUSD')
         timeframe: Timeframe string (e.g., '15m', '1h')
         save_chart: Si True, guarda el chart a disco
         output_dir: Directorio donde guardar el chart
@@ -100,7 +100,7 @@ def generate_chart_for_visual_agent_playwright(
     Genera un chart usando Enhanced Playwright Capture (versión sync).
     
     Args:
-        symbol: Trading symbol (e.g., 'BTCUSDT')
+        symbol: Trading symbol (e.g., 'BTCUSD')
         timeframe: Timeframe string (e.g., '15m', '1h')
         save_chart: Si True, guarda el chart a disco
         output_dir: Directorio donde guardar el chart
@@ -204,7 +204,7 @@ if __name__ == "__main__":
     print("=" * 50)
     
     chart_b64, chart_path = generate_chart_for_visual_agent_playwright(
-        symbol="SOLUSDT",
+        symbol="SOLUSD",
         timeframe="1",
         save_chart=True
     )

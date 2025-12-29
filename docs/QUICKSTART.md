@@ -70,7 +70,7 @@ Edit `config/fenix.yaml`:
 
 ```yaml
 trading:
-  symbol: BTCUSDT
+  symbol: BTCUSD
   timeframe: 15m
   
 agents:
@@ -108,8 +108,8 @@ Access the dashboard at: **<http://localhost:5173>**
 python run_fenix.py --help
 
 # Examples:
-python run_fenix.py                      # Paper trading, BTCUSDT, 15m
-python run_fenix.py --symbol ETHUSDT     # Different symbol
+python run_fenix.py                      # Paper trading, BTCUSD, 15m
+python run_fenix.py --symbol ETHUSD     # Different symbol
 python run_fenix.py --timeframe 5m       # Different timeframe
 python run_fenix.py --no-visual          # Disable visual agent
 python run_fenix.py --dry-run            # Simulate without executing

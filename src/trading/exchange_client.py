@@ -132,7 +132,7 @@ class ExchangeClient:
             logger.error(f"Failed to fetch klines for {symbol}: {e}")
             return []
 
-    async def get_balance(self, asset: str = "USDT") -> float:
+    async def get_balance(self, asset: str = "USD") -> float:
         """
         Gets the balance of an asset.
         """

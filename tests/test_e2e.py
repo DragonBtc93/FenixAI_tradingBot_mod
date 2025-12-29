@@ -16,7 +16,7 @@ class TestEndToEndTradingFlow:
     def complete_market_state(self):
         """Estado completo del mercado para E2E."""
         return {
-            "symbol": "BTCUSDT",
+            "symbol": "BTCUSD",
             "timestamp": datetime.now().isoformat(),
             "price": 95000.0,
             "open_24h": 94000.0,
@@ -107,7 +107,7 @@ class TestEndToEndTradingFlow:
         assert market_data["price"] == 95000.0
         
         # 2. Technical Analysis
-        tech_response = mock_llm_client.generate("Perform technical analysis on BTCUSDT")
+        tech_response = mock_llm_client.generate("Perform technical analysis on BTCUSD")
         tech_result = json.loads(tech_response)
         assert tech_result["action"] == "BUY"
         assert tech_result["confidence"] > 0.7
@@ -253,7 +253,7 @@ class TestEndToEndAPIFlow:
         
         # 3. Crear orden
         order_data = {
-            "symbol": "BTCUSDT",
+            "symbol": "BTCUSD",
             "type": "market",
             "side": "buy",
             "quantity": 0.1

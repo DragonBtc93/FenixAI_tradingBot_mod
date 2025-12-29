@@ -6,7 +6,7 @@ from src.trading.engine import TradingEngine
 logging.basicConfig(level=logging.INFO)
 
 async def run_test():
-    engine = TradingEngine(symbol="BTCUSDT", timeframe="15m", paper_trading=True, enable_sentiment_agent=True)
+    engine = TradingEngine(symbol="BTCUSD", timeframe="15m", paper_trading=True, enable_sentiment_agent=True)
     await engine.initialize()
 
     # Prepare dummy data

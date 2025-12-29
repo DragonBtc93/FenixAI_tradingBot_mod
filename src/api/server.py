@@ -36,7 +36,7 @@ from src.models.user import User
 
 class OrderCreate(BaseModel):
     """Schema for creating an order."""
-    symbol: str = Field(default="BTC/USDT", description="Trading pair")
+    symbol: str = Field(default="BTC/USD", description="Trading pair")
     type: str = Field(default="market", description="Order type: market, limit, stop")
     side: str = Field(..., description="Order side: buy or sell")
     quantity: float = Field(..., gt=0, description="Order quantity")
@@ -97,7 +97,7 @@ class AgentOutputResponse(BaseModel):
 
 class EngineConfigUpdate(BaseModel):
     """Payload for updating engine configuration."""
-    symbol: Optional[str] = Field(None, description="Trading pair, e.g., BTC/USDT")
+    symbol: Optional[str] = Field(None, description="Trading pair, e.g., BTC/USD")
     timeframe: Optional[str] = Field(None, description="Timeframe, e.g., 1m,5m,15m")
     paper_trading: Optional[bool] = Field(None, description="Paper trading on/off")
     allow_live_trading: Optional[bool] = Field(None, description="Allow live trading")
@@ -187,7 +187,7 @@ async def lifespan(app: FastAPI):
     logger.info("Initializing Trading Engine...")
     engine = TradingEngine(
         exchange_id=os.getenv("EXCHANGE_ID", "binance"),
-        symbol=os.getenv("DEFAULT_SYMBOL", "BTC/USDT"),
+        symbol=os.getenv("DEFAULT_SYMBOL", "BTC/USD"),
         timeframe="15m",
         paper_trading=True,
         allow_live_trading=False,
@@ -200,7 +200,7 @@ async def lifespan(app: FastAPI):
     # Start AutoEvaluator
     try:
         from src.analysis.auto_evaluator import AutoEvaluator
-        auto_evaluator = AutoEvaluator(symbol=os.getenv("DEFAULT_SYMBOL", "BTC/USDT"), evaluation_horizon_minutes=15)
+        auto_evaluator = AutoEvaluator(symbol=os.getenv("DEFAULT_SYMBOL", "BTC/USD"), evaluation_horizon_minutes=15)
         asyncio.create_task(auto_evaluator.start())
         logger.info("✅ AutoEvaluator started")
     except Exception as e:
@@ -536,7 +536,7 @@ async def _restart_engine_with_config(
     """Restart engine with new configuration requested by the UI."""
     global engine, _engine_task
 
-    current_symbol = symbol or (engine.symbol if engine else "BTC/USDT")
+    current_symbol = symbol or (engine.symbol if engine else "BTC/USD")
     current_timeframe = timeframe or (engine.timeframe if engine else "15m")
     current_paper = paper_trading if paper_trading is not None else (engine.paper_trading if engine else True)
     current_live = allow_live_trading if allow_live_trading is not None else (engine.allow_live_trading if engine else False)
@@ -899,7 +899,7 @@ async def get_trade_history(
 @app.get("/api/trading/market")
 async def get_market_data(symbol: Optional[str] = Query(None)):
     """Return live market snapshot using engine stream with exchange fallback."""
-    target_symbol = (symbol or (engine.symbol if engine else "BTC/USDT")).upper()
+    target_symbol = (symbol or (engine.symbol if engine else "BTC/USD")).upper()
 
     status = engine.get_status() if engine else {}
 
@@ -1164,11 +1164,11 @@ async def get_market_series(
 async def get_market_overview(symbols: Optional[str] = Query(None)):
     """Return 24h overview for a handful of symbols used by the dashboard."""
     default_symbols = [
-        engine.symbol if engine else "BTC/USDT",
-        "ETH/USDT",
-        "SOL/USDT",
-        "BNB/USDT",
-        "ADA/USDT",
+        engine.symbol if engine else "BTC/USD",
+        "ETH/USD",
+        "SOL/USD",
+        "BNB/USD",
+        "ADA/USD",
     ]
 
     symbol_list = [s.strip().upper() for s in (symbols.split(",") if symbols else default_symbols) if s.strip()]

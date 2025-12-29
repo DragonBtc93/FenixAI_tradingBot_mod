@@ -6,7 +6,7 @@ Main execution script for Fenix Trading Bot.
 Usage:
     python run_fenix.py                    # Paper trading with Ollama
     python run_fenix.py --mode live        # Live trading
-    python run_fenix.py --symbol ETH/USDT  # Other pair
+    python run_fenix.py --symbol ETH/USD  # Other pair
     python run_fenix.py --help             # See options
 """
 from __future__ import annotations
@@ -46,9 +46,9 @@ def parse_args():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python run_fenix.py                       # Paper trading, BTC/USDT, 15m
+  python run_fenix.py                       # Paper trading, BTC/USD, 15m
   python run_fenix.py --mode live           # Live trading
-  python run_fenix.py --symbol ETH/USDT     # Other pair
+  python run_fenix.py --symbol ETH/USD     # Other pair
   python run_fenix.py --timeframe 5m        # Other timeframe
   python run_fenix.py --no-visual           # Without visual agent
         """,
@@ -72,8 +72,8 @@ Examples:
     )
     parser.add_argument(
         "--symbol",
-        default=os.getenv("DEFAULT_SYMBOL", "BTC/USDT"),
-        help="Pair to trade (default: BTC/USDT)",
+        default=os.getenv("DEFAULT_SYMBOL", "BTC/USD"),
+        help="Pair to trade (default: BTC/USD)",
     )
     parser.add_argument(
         "--timeframe",

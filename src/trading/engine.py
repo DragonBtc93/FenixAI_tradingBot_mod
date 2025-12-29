@@ -54,7 +54,7 @@ logger = logging.getLogger("FenixTradingEngine")
 class TradingConfig:
     """Configuration for the trading engine."""
     exchange_id: str = "binance"
-    symbol: str = "BTC/USDT"
+    symbol: str = "BTC/USD"
     interval: str = "15m"
     analysis_interval: int = 60
     use_visual: bool = True
@@ -82,7 +82,7 @@ class TradingEngine:
     def __init__(
         self,
         exchange_id: str = "binance",
-        symbol: str = "BTC/USDT",
+        symbol: str = "BTC/USD",
         timeframe: str = "15m",
         use_testnet: bool = False,
         paper_trading: bool = True,
@@ -620,7 +620,7 @@ class TradingEngine:
 
 async def run_trading_engine(
     exchange_id: str = "binance",
-    symbol: str = "BTC/USDT",
+    symbol: str = "BTC/USD",
     timeframe: str = "15m",
     paper_trading: bool = True,
 ) -> None:
@@ -645,7 +645,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Fenix Trading Engine")
     parser.add_argument("--exchange", default="binance", help="Exchange to trade on")
-    parser.add_argument("--symbol", default="BTC/USDT", help="Trading pair")
+    parser.add_argument("--symbol", default="BTC/USD", help="Trading pair")
     parser.add_argument("--timeframe", default="15m", help="Timeframe")
     parser.add_argument("--live", action="store_true", help="Enable live trading")
     args = parser.parse_args()

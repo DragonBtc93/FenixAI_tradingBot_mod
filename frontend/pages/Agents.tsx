@@ -33,7 +33,7 @@ export const Agents: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [agentOutputs, setAgentOutputs] = useState<ReasoningEntry[]>([]);
   const [filteredOutputs, setFilteredOutputs] = useState<ReasoningEntry[]>([]);
-  const [configDraft, setConfigDraft] = useState({ symbol: 'BTCUSDT', timeframe: '15m', enable_visual_agent: true, enable_sentiment_agent: true, paper_trading: true, allow_live_trading: false });
+  const [configDraft, setConfigDraft] = useState({ symbol: 'BTCUSD', timeframe: '15m', enable_visual_agent: true, enable_sentiment_agent: true, paper_trading: true, allow_live_trading: false });
   const [isSavingConfig, setIsSavingConfig] = useState(false);
 
   useEffect(() => {
@@ -359,7 +359,7 @@ export const Agents: React.FC = () => {
               <Input
                 value={configDraft.symbol}
                 onChange={(e) => setConfigDraft(prev => ({ ...prev, symbol: e.target.value.toUpperCase() }))}
-                placeholder="BTCUSDT"
+                placeholder="BTCUSD"
               />
             </div>
             <div>

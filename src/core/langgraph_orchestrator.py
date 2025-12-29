@@ -375,7 +375,7 @@ def create_technical_agent_node(llm: Any, reasoning_bank: Any = None):
             # Formatear prompt
             messages = format_prompt(
                 "technical_analyst",
-                symbol=state.get("symbol", "BTCUSDT"),
+                symbol=state.get("symbol", "BTCUSD"),
                 timeframe=state.get("timeframe", "15m"),
                 indicators_json=json.dumps(indicators, indent=2, default=str),
                 htf_context=json.dumps(mtf_context.get("htf", {}), default=str),
@@ -480,7 +480,7 @@ def create_sentiment_agent_node(llm: Any, reasoning_bank: Any = None):
 
             messages = format_prompt(
                 "sentiment_analyst",
-                symbol=state.get("symbol", "BTCUSDT"),
+                symbol=state.get("symbol", "BTCUSD"),
                 news_summary=news_summary,
                 social_data=social_data_json,
                 fear_greed_value=fg_value,
@@ -579,7 +579,7 @@ def create_visual_agent_node(llm: Any, reasoning_bank: Any = None):
             # Preparar mensaje con imagen
             image_prompt = format_prompt(
                 "visual_analyst",
-                symbol=state.get("symbol", "BTCUSDT"),
+                symbol=state.get("symbol", "BTCUSD"),
                 timeframe=state.get("timeframe", "15m"),
                 candle_count=50,
                 visible_indicators="EMA 9/21, Bollinger Bands, SuperTrend",
@@ -688,7 +688,7 @@ def create_qabba_agent_node(llm: Any, reasoning_bank: Any = None):
         try:
             messages = format_prompt(
                 "qabba_analyst",
-                symbol=state.get("symbol", "BTCUSDT"),
+                symbol=state.get("symbol", "BTCUSD"),
                 obi_value=str(state.get("obi", 1.0)),
                 cvd_value=str(state.get("cvd", 0)),
                 spread_value=str(state.get("spread", 0.01)),
@@ -772,7 +772,7 @@ def create_decision_agent_node(llm: Any, reasoning_bank: Any = None):
         try:
             messages = format_prompt(
                 "decision_agent",
-                symbol=state.get("symbol", "BTCUSDT"),
+                symbol=state.get("symbol", "BTCUSD"),
                 technical_analysis=json.dumps(state.get("technical_report", {}), indent=2, default=str),
                 sentiment_analysis=json.dumps(state.get("sentiment_report", {}), indent=2, default=str),
                 visual_analysis=json.dumps(state.get("visual_report", {}), indent=2, default=str),
@@ -1134,7 +1134,7 @@ class FenixTradingGraph:
         Ejecuta el grafo de trading completo.
         
         Args:
-            symbol: Símbolo del par (ej: "BTCUSDT")
+            symbol: Símbolo del par (ej: "BTCUSD")
             timeframe: Temporalidad (ej: "15m")
             indicators: Diccionario de indicadores técnicos
             current_price: Precio actual
@@ -1318,7 +1318,7 @@ if __name__ == "__main__":
     }
     
     result = trading_graph.invoke(
-        symbol="BTCUSDT",
+        symbol="BTCUSD",
         timeframe="15m",
         indicators=test_indicators,
         current_price=67500.0,

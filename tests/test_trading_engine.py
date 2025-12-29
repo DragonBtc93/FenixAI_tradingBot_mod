@@ -14,7 +14,7 @@ class TestTradingConfig:
 
         config = TradingConfig()
 
-        assert config.symbol == "BTCUSDT"
+        assert config.symbol == "BTCUSD"
         assert config.interval == "15m"
         assert config.testnet is True
         assert config.dry_run is False
@@ -24,12 +24,12 @@ class TestTradingConfig:
         from src.trading.engine import TradingConfig
 
         config = TradingConfig(
-            symbol="ETHUSDT",
+            symbol="ETHUSD",
             interval="5m",
             max_risk_per_trade=1.5,
         )
 
-        assert config.symbol == "ETHUSDT"
+        assert config.symbol == "ETHUSD"
         assert config.interval == "5m"
         assert config.max_risk_per_trade == 1.5
 
@@ -43,7 +43,7 @@ class TestTradingEngine:
         from src.trading.engine import TradingEngine
 
         return TradingEngine(
-            symbol="BTCUSDT",
+            symbol="BTCUSD",
             timeframe="15m",
             use_testnet=True,
             paper_trading=True,
@@ -51,7 +51,7 @@ class TestTradingEngine:
 
     def test_engine_initialization(self, trading_engine):
         """Verificar inicialización del engine."""
-        assert trading_engine.symbol == "BTCUSDT"
+        assert trading_engine.symbol == "BTCUSD"
         assert trading_engine.timeframe == "15m"
         assert trading_engine.paper_trading is True
 
@@ -83,7 +83,7 @@ class TestTradingEngineSignalLogging:
         from src.trading.engine import TradingEngine
 
         engine = TradingEngine(
-            symbol="BTCUSDT",
+            symbol="BTCUSD",
             timeframe="15m",
         )
 
@@ -97,7 +97,7 @@ class TestTradingEngineSafety:
         """Verificar que paper trading es el default."""
         from src.trading.engine import TradingEngine
 
-        engine = TradingEngine(symbol="BTCUSDT", timeframe="15m")
+        engine = TradingEngine(symbol="BTCUSD", timeframe="15m")
 
         assert engine.paper_trading is True
 
@@ -106,7 +106,7 @@ class TestTradingEngineSafety:
         from src.trading.engine import TradingEngine
 
         engine = TradingEngine(
-            symbol="BTCUSDT",
+            symbol="BTCUSD",
             timeframe="15m",
             paper_trading=False,
             allow_live_trading=False,

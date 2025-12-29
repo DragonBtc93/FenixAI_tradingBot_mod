@@ -32,7 +32,7 @@ async def test_visual_agent():
     client = BinanceClient(testnet=False)
     await client.connect()
     
-    klines = await client.get_klines("BTCUSDT", "15m", limit=100)
+    klines = await client.get_klines("BTCUSD", "15m", limit=100)
     await client.close()
     
     logger.info(f"   Got {len(klines)} candles")
@@ -54,7 +54,7 @@ async def test_visual_agent():
     
     result = chart_gen.generate_chart(
         kline_data=kline_data,
-        symbol="BTCUSDT",
+        symbol="BTCUSD",
         timeframe="15m",
         show_indicators=["ema", "bollinger", "supertrend"],
         show_trendlines=True,
@@ -76,7 +76,7 @@ async def test_visual_agent():
     import httpx
     
     # Create prompt for vision model
-    visual_prompt = """Analiza esta imagen de un gráfico de velas de BTCUSDT.
+    visual_prompt = """Analiza esta imagen de un gráfico de velas de BTCUSD.
 
 Observa los siguientes elementos:
 1. Patrón de velas (verdes=alcistas, rojas=bajistas)

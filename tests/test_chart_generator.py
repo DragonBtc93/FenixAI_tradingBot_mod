@@ -42,7 +42,7 @@ def generate_sample_kline_data(n=50, start_price=100.0, timeframe_minutes=15):
 def test_fenix_chart_generator_smoke():
     kdata = generate_sample_kline_data(60)
     gen = FenixChartGenerator()
-    res = gen.generate_chart(kdata, symbol="BTCUSDT", timeframe="15m", last_n_candles=50)
+    res = gen.generate_chart(kdata, symbol="BTCUSD", timeframe="15m", last_n_candles=50)
 
     if MPLFINANCE_AVAILABLE:
         assert res.get("image_b64") is not None
@@ -72,7 +72,7 @@ def test_indicators_alignment():
 async def test_fenix_chart_generator_async_call():
     kdata = generate_sample_kline_data(30)
     gen = FenixChartGenerator()
-    res = gen.generate_chart(kdata, symbol="BTCUSDT", timeframe="15m", last_n_candles=30)
+    res = gen.generate_chart(kdata, symbol="BTCUSD", timeframe="15m", last_n_candles=30)
     # Same assertions
     if MPLFINANCE_AVAILABLE:
         assert res.get("image_b64") is not None

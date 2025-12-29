@@ -455,7 +455,7 @@ class FenixChartGenerator:
         
         Args:
             kline_data: Diccionario con datos OHLCV
-            symbol: Símbolo del par (ej: "BTCUSDT")
+            symbol: Símbolo del par (ej: "BTCUSD")
             timeframe: Temporalidad (ej: "15m", "1h", "4h")
             show_indicators: Lista de indicadores a mostrar
             show_trendlines: Si mostrar líneas de tendencia
@@ -778,7 +778,7 @@ if LANGCHAIN_TOOLS_AVAILABLE:
             dict,
             "Diccionario con datos OHLCV: 'Open', 'High', 'Low', 'Close', 'Volume', 'Datetime'"
         ],
-        symbol: Annotated[str, "Símbolo del par (ej: 'BTCUSDT')"] = "BTCUSDT",
+        symbol: Annotated[str, "Símbolo del par (ej: 'BTCUSD')"] = "BTCUSD",
         timeframe: Annotated[str, "Temporalidad (ej: '15m', '1h', '4h')"] = "1h",
     ) -> dict:
         """
@@ -808,7 +808,7 @@ if LANGCHAIN_TOOLS_AVAILABLE:
             dict,
             "Diccionario con datos OHLCV: 'Open', 'High', 'Low', 'Close', 'Volume', 'Datetime'"
         ],
-        symbol: Annotated[str, "Símbolo del par"] = "BTCUSDT",
+        symbol: Annotated[str, "Símbolo del par"] = "BTCUSD",
         timeframe: Annotated[str, "Temporalidad"] = "1h",
     ) -> dict:
         """
@@ -889,7 +889,7 @@ if __name__ == "__main__":
     generator = FenixChartGenerator()
     result = generator.generate_chart(
         kline_data=test_data,
-        symbol='BTCUSDT',
+        symbol='BTCUSD',
         timeframe='1h',
         show_indicators=['ema_9', 'ema_21', 'bb_bands', 'supertrend', 'volume'],
     )

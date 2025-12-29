@@ -13,7 +13,7 @@ class AutoEvaluator:
     Evaluates agent predictions against actual market movements.
     Updates ReasoningBank entries with success/failure status.
     """
-    def __init__(self, symbol: str = "BTCUSDT", evaluation_horizon_minutes: int = 15):
+    def __init__(self, symbol: str = "BTCUSD", evaluation_horizon_minutes: int = 15):
         self.symbol = symbol
         self.horizon = evaluation_horizon_minutes
         self.bank = get_reasoning_bank()

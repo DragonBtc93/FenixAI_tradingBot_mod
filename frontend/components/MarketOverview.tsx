@@ -21,15 +21,15 @@ interface ChartPoint {
 }
 
 const symbolToName: Record<string, string> = {
-  BTCUSDT: 'Bitcoin',
-  ETHUSDT: 'Ethereum',
-  SOLUSDT: 'Solana',
-  BNBUSDT: 'BNB',
-  ADAUSDT: 'Cardano',
+  BTCUSD: 'Bitcoin',
+  ETHUSD: 'Ethereum',
+  SOLUSD: 'Solana',
+  BNBUSD: 'BNB',
+  ADAUSD: 'Cardano',
 };
 
 export function MarketOverview() {
-  const [selectedSymbol, setSelectedSymbol] = useState('BTCUSDT');
+  const [selectedSymbol, setSelectedSymbol] = useState('BTCUSD');
   const [marketData, setMarketData] = useState<MarketOverviewItem[]>([]);
   const [chartData, setChartData] = useState<ChartPoint[]>([]);
   const [isLoading, setIsLoading] = useState(true);

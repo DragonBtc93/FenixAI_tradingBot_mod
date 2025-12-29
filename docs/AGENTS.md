@@ -112,8 +112,8 @@ Analyzes TradingView chart screenshots to identify visual patterns that may not 
 
 ```python
 {
-    "chart_path": "/path/to/BTCUSDT_15m_chart.png",
-    "symbol": "BTCUSDT",
+    "chart_path": "/path/to/BTCUSD_15m_chart.png",
+    "symbol": "BTCUSD",
     "timeframe": "15m"
 }
 ```

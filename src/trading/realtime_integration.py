@@ -37,7 +37,7 @@ class RealtimeTradingPipeline:
     
     def __init__(
         self,
-        symbol: str = "BTCUSDT",
+        symbol: str = "BTCUSD",
         timeframe: str = "15m",
         llm_config: LLMProvidersConfig | None = None,
         use_testnet: bool = True,
@@ -280,7 +280,7 @@ async def example_usage():
     
     # Crear pipeline
     pipeline = RealtimeTradingPipeline(
-        symbol="BTCUSDT",
+        symbol="BTCUSD",
         timeframe="15m",
         use_testnet=True,
         min_interval_seconds=60,
